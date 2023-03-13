@@ -42,10 +42,10 @@ services:
   pgadmin4:
     image: dpage/pgadmin4
     volumes:
-        - pgadmin4_data:/var/lib/pgadmin
+      - pgadmin4_data:/var/lib/pgadmin
     environment:
-        PGADMIN_DEFAULT_EMAIL: pgadmin4@gmail.com
-        PGADMIN_DEFAULT_PASSWORD: password
+      PGADMIN_DEFAULT_EMAIL: pgadmin4@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: password
     depends_on:
       - db
 
