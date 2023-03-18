@@ -1,0 +1,29 @@
+# Compiled Python files
+*.pyc
+
+# Compiled C extensions
+*.so
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+
+# IDE
+.vscode/
+.idea/
+
+# Environments
+venv/
+env/
+env.bak/
+*.env
+.env*
+
+# Logs
+*.log
+
+# Other
+__pycache__/
+*.pyo
+*.pyd

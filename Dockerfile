@@ -11,9 +11,13 @@ RUN apt-get update \
     git \
     vim
 
-ENV POETRY_HOME=/opt/poetry \
-    POETRY_VIRTUALENVS_CREATE=false
+# install poetry
+ENV POETRY_HOME=/opt/poetry
 ENV PATH="$POETRY_HOME/bin:$PATH"
+ENV POETRY_NO_INTERACTION=1
 
 RUN pip install pipx
 RUN pipx install poetry
+COPY pyproject.toml poetry.lock /tmp/poetry/
+WORKDIR /tmp/poetry
+RUN poetry config virtualenvs.create false && poetry install --no-root && rm -rf /tmp/poetry
