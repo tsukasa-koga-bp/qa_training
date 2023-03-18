@@ -1,7 +1,7 @@
 // Update the VARIANT arg in docker-compose.yml to pick a Python version
 {
-    "name": "Python 3 & PostgreSQL",
-    "dockerComposeFile": "docker-compose.yml",
+    "name": "qa_training",
+    "dockerComposeFile": "../docker-compose.yml",
     "service": "app",
     "workspaceFolder": "/workspace",
     // Configure tool-specific properties.
