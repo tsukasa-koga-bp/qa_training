@@ -18,6 +18,6 @@ ENV POETRY_NO_INTERACTION=1
 
 RUN pip install pipx
 RUN pipx install poetry
-COPY pyproject.toml poetry.lock /tmp/poetry/
+COPY ../pyproject.toml ../poetry.lock /tmp/poetry/
 WORKDIR /tmp/poetry
 RUN poetry config virtualenvs.create false && poetry install --no-root && rm -rf /tmp/poetry
