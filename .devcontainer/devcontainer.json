@@ -1,7 +1,7 @@
 // Update the VARIANT arg in docker-compose.yml to pick a Python version
 {
     "name": "qa_training",
-    "dockerComposeFile": "../docker-compose.yml",
+    "dockerComposeFile": "../docker/docker-compose.yml",
     "service": "app",
     "workspaceFolder": "/workspace",
     // Configure tool-specific properties.
@@ -19,15 +19,15 @@
             },
             // Add the IDs of extensions you want installed when the container is created.
             "extensions": [
-				"ms-python.python",
-				"ms-python.vscode-pylance",
-				"bungcip.better-toml",
-				"janisdd.vscode-edit-csv",
-				"charliermarsh.ruff",
-				"njpwerner.autodocstring",
-				"VisualStudioExptTeam.vscodeintellicode",
-				"KevinRose.vsc-python-indent"
-			]
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "bungcip.better-toml",
+                "janisdd.vscode-edit-csv",
+                "charliermarsh.ruff",
+                "njpwerner.autodocstring",
+                "VisualStudioExptTeam.vscodeintellicode",
+                "KevinRose.vsc-python-indent"
+            ]
         }
     },
     // Use 'forwardPorts' to make a list of ports inside the container available locally.

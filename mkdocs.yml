@@ -1,0 +1,23 @@
+site_name: 品質保証演習_ドキュメント
+repo_url: https://github.com/majitaki4ryu/qa_training
+
+nav:
+  - ホーム: index.md
+  - 要求: requrements.md
+  - ドメインモデル: domain_model.md
+  - ユースケース: usecase_menu.md
+
+theme:
+  name: material
+  language: "ja"
+  icon:
+    logo: material/currency-sign
+  features:
+    - navigation.tabs
+    - navigation.top
+    - content.tabs.link
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: teal
+      accent: purple

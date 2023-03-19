@@ -3,11 +3,11 @@ version: '3.8'
 services:
   app:
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: ./
+      dockerfile: ./docker/Dockerfile
 
     volumes:
-      - .:/workspace:cached
+      - ./:/workspace:cached
 
     # Overrides default command so things don't shut down after the process ends.
     command: sleep infinity
