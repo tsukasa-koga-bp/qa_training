@@ -1,79 +1,24 @@
-site_name: 品質保証演習_ドキュメント
+site_name: QA_Training
 repo_url: https://github.com/majitaki4ryu/qa_training
+repo_name: majitaki4ryu/qa_training
+
+use_directory_urls: false
 
 nav:
   - ホーム: index.md
-  - 要求: requrements.md
+  - 要求: requirements.md
   - ドメインモデル: domain_model.md
-  - ユースケース: usecase_menu.md
 
 theme:
   name: material
-  language: "ja"
-  icon:
-    logo: material/currency-sign
   features:
     - navigation.tabs
+    - navigation.tabs.sticky
     - navigation.top
     - content.tabs.link
-  palette:
-    - media: "(prefers-color-scheme: light)"
-      scheme: default
-      primary: teal
-      accent: purple
-
-extra_css:
-  - css/material.css
-  - css/mkdocstrings.css
-  - css/style.css
 
 markdown_extensions:
   - admonition
-  - pymdownx.emoji
   - pymdownx.magiclink
   - pymdownx.snippets:
       check_paths: true
-  - pymdownx.superfences:
-      custom_fences:
-        - name: mermaid
-          class: mermaid
-          format: !!python/name:pymdownx.superfences.fence_code_format
-  - pymdownx.tabbed:
-      alternate_style: true
-  - pymdownx.tasklist
-  - toc:
-      permalink: "¤"
-  - pymdownx.highlight:
-      use_pygments: true
-      auto_title: true
-      linenums: true
-  - def_list
-  - attr_list
-  - md_in_html
-
-
-plugins:
-  - search
-  #- gen-files:
-  #    scripts:
-  #    - docs/gen_ref_pages.py
-  - literate-nav:
-      nav_file: SUMMARY.md
-  - mkdocstrings:
-      default_handler: python
-      handlers:
-        python:
-          selection:
-            docstring_style: google
-            inherited_members: true
-            filters:
-              - "!^__"
-          rendering:
-            show_root_heading: true
-            members_order: source
-            show_category_heading: true
-      watch:
-        - src/qa_training
-  - kroki
-  - table-reader:
-      data_path: "docs"

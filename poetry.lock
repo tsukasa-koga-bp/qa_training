@@ -334,66 +334,19 @@ i18n = ["babel (>=2.9.0)"]
 min-versions = ["babel (==2.9.0)", "click (==7.0)", "colorama (==0.4)", "ghp-import (==1.0)", "importlib-metadata (==4.3)", "jinja2 (==2.11.1)", "markdown (==3.2.1)", "markupsafe (==2.0.1)", "mergedeep (==1.3.4)", "packaging (==20.5)", "pyyaml (==5.1)", "pyyaml-env-tag (==0.1)", "typing-extensions (==3.10)", "watchdog (==2.0)"]
 
 [[package]]
-name = "mkdocs-autorefs"
-version = "0.4.1"
-description = "Automatically link across pages in MkDocs."
+name = "mkdocs-drawio-exporter"
+version = "0.8.0"
+description = "Exports your Draw.io diagrams at build time for easier embedding into your documentation"
 category = "dev"
 optional = false
-python-versions = ">=3.7"
+python-versions = "*"
 files = [
-    {file = "mkdocs-autorefs-0.4.1.tar.gz", hash = "sha256:70748a7bd025f9ecd6d6feeba8ba63f8e891a1af55f48e366d6d6e78493aba84"},
-    {file = "mkdocs_autorefs-0.4.1-py3-none-any.whl", hash = "sha256:a2248a9501b29dc0cc8ba4c09f4f47ff121945f6ce33d760f145d6f89d313f5b"},
+    {file = "mkdocs-drawio-exporter-0.8.0.tar.gz", hash = "sha256:f5cbc0d7ce854ba6c79a93abbf839f3d9e6445f81f69f05f696c60589225c300"},
+    {file = "mkdocs_drawio_exporter-0.8.0-py3-none-any.whl", hash = "sha256:c5f41c739f0722e791fbe9ba88265e276815413139331789ebdfdd757a3fdcb7"},
 ]
 
 [package.dependencies]
-Markdown = ">=3.3"
-mkdocs = ">=1.1"
-
-[[package]]
-name = "mkdocs-gen-files"
-version = "0.4.0"
-description = "MkDocs plugin to programmatically generate documentation pages during the build"
-category = "dev"
-optional = false
-python-versions = ">=3.7,<4.0"
-files = [
-    {file = "mkdocs-gen-files-0.4.0.tar.gz", hash = "sha256:377bff8ee8e93515916689f483d971643f83a94eed7e92318854da8f344f0163"},
-    {file = "mkdocs_gen_files-0.4.0-py3-none-any.whl", hash = "sha256:3241a4c947ecd11763ca77cc645015305bf71a0e1b9b886801c114fcf9971e71"},
-]
-
-[package.dependencies]
-mkdocs = ">=1.0.3,<2.0.0"
-
-[[package]]
-name = "mkdocs-kroki-plugin"
-version = "0.6.1"
-description = "MkDocs plugin for Kroki-Diagrams"
-category = "dev"
-optional = false
-python-versions = ">=3.6"
-files = [
-    {file = "mkdocs-kroki-plugin-0.6.1.tar.gz", hash = "sha256:c3ee8fc9ac715222c0ace9080f4fcdf3ddd231f13f4edc3f1c73c6db841c5588"},
-    {file = "mkdocs_kroki_plugin-0.6.1-py3-none-any.whl", hash = "sha256:2b1ee90cee532adfa3414b78da4e31291a537bbcca897feaf25beef061c1faeb"},
-]
-
-[package.dependencies]
-mkdocs = ">=1.3.0"
-requests = ">=2.27.0"
-
-[[package]]
-name = "mkdocs-literate-nav"
-version = "0.6.0"
-description = "MkDocs plugin to specify the navigation in Markdown instead of YAML"
-category = "dev"
-optional = false
-python-versions = ">=3.7"
-files = [
-    {file = "mkdocs_literate_nav-0.6.0-py3-none-any.whl", hash = "sha256:8c1b84714e5974da5e44e011ec0069275ae7647270c13a679662cf6ffce675a4"},
-    {file = "mkdocs_literate_nav-0.6.0.tar.gz", hash = "sha256:81ccbea18163ae8e10bd0bd39237fe70c32a1f2dff6c170779f5d52dd98a0470"},
-]
-
-[package.dependencies]
-mkdocs = ">=1.0.3"
+mkdocs = "*"
 
 [[package]]
 name = "mkdocs-material"
@@ -429,65 +382,6 @@ files = [
     {file = "mkdocs_material_extensions-1.1.1-py3-none-any.whl", hash = "sha256:e41d9f38e4798b6617ad98ca8f7f1157b1e4385ac1459ca1e4ea219b556df945"},
     {file = "mkdocs_material_extensions-1.1.1.tar.gz", hash = "sha256:9c003da71e2cc2493d910237448c672e00cefc800d3d6ae93d2fc69979e3bd93"},
 ]
-
-[[package]]
-name = "mkdocs-table-reader-plugin"
-version = "2.0"
-description = "MkDocs plugin to directly insert tables from files into markdown."
-category = "dev"
-optional = false
-python-versions = ">=3.6"
-files = [
-    {file = "mkdocs-table-reader-plugin-2.0.tar.gz", hash = "sha256:cb2f5ca1b666e4a7452d196810558ba815f597de01822686c2208d57cb21f9d2"},
-    {file = "mkdocs_table_reader_plugin-2.0-py3-none-any.whl", hash = "sha256:c3d3b063a19e5a619f6062cb5963bd3d04c1f4e4f5d4ff75d9e33f3e79a1d535"},
-]
-
-[package.dependencies]
-mkdocs = ">=1.0"
-pandas = ">=1.1"
-PyYAML = ">=5.4.1"
-tabulate = ">=0.8.7"
-
-[[package]]
-name = "mkdocstrings"
-version = "0.20.0"
-description = "Automatic documentation from sources, for MkDocs."
-category = "dev"
-optional = false
-python-versions = ">=3.7"
-files = [
-    {file = "mkdocstrings-0.20.0-py3-none-any.whl", hash = "sha256:f17fc2c4f760ec302b069075ef9e31045aa6372ca91d2f35ded3adba8e25a472"},
-    {file = "mkdocstrings-0.20.0.tar.gz", hash = "sha256:c757f4f646d4f939491d6bc9256bfe33e36c5f8026392f49eaa351d241c838e5"},
-]
-
-[package.dependencies]
-Jinja2 = ">=2.11.1"
-Markdown = ">=3.3"
-MarkupSafe = ">=1.1"
-mkdocs = ">=1.2"
-mkdocs-autorefs = ">=0.3.1"
-pymdown-extensions = ">=6.3"
-
-[package.extras]
-crystal = ["mkdocstrings-crystal (>=0.3.4)"]
-python = ["mkdocstrings-python (>=0.5.2)"]
-python-legacy = ["mkdocstrings-python-legacy (>=0.2.1)"]
-
-[[package]]
-name = "mkdocstrings-python-legacy"
-version = "0.2.3"
-description = "A legacy Python handler for mkdocstrings."
-category = "dev"
-optional = false
-python-versions = ">=3.7"
-files = [
-    {file = "mkdocstrings-python-legacy-0.2.3.tar.gz", hash = "sha256:3fb58fdabe19c6b52b8bb1d3bb1540b1cd527b562865468d6754e8cd1201050c"},
-    {file = "mkdocstrings_python_legacy-0.2.3-py3-none-any.whl", hash = "sha256:1b04d71a4064b0bb8ea9448debab89868a752c7e7bfdd11de480dfbcb9751a00"},
-]
-
-[package.dependencies]
-mkdocstrings = ">=0.19"
-pytkdocs = ">=0.14"
 
 [[package]]
 name = "numpy"
@@ -538,54 +432,6 @@ files = [
     {file = "packaging-23.0-py3-none-any.whl", hash = "sha256:714ac14496c3e68c99c29b00845f7a2b85f3bb6f1078fd9f72fd20f0570002b2"},
     {file = "packaging-23.0.tar.gz", hash = "sha256:b6ad297f8907de0fa2fe1ccbd26fdaf387f5f47c7275fedf8cce89f99446cf97"},
 ]
-
-[[package]]
-name = "pandas"
-version = "1.5.3"
-description = "Powerful data structures for data analysis, time series, and statistics"
-category = "dev"
-optional = false
-python-versions = ">=3.8"
-files = [
-    {file = "pandas-1.5.3-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:3749077d86e3a2f0ed51367f30bf5b82e131cc0f14260c4d3e499186fccc4406"},
-    {file = "pandas-1.5.3-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:972d8a45395f2a2d26733eb8d0f629b2f90bebe8e8eddbb8829b180c09639572"},
-    {file = "pandas-1.5.3-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:50869a35cbb0f2e0cd5ec04b191e7b12ed688874bd05dd777c19b28cbea90996"},
-    {file = "pandas-1.5.3-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:c3ac844a0fe00bfaeb2c9b51ab1424e5c8744f89860b138434a363b1f620f354"},
-    {file = "pandas-1.5.3-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:7a0a56cef15fd1586726dace5616db75ebcfec9179a3a55e78f72c5639fa2a23"},
-    {file = "pandas-1.5.3-cp310-cp310-win_amd64.whl", hash = "sha256:478ff646ca42b20376e4ed3fa2e8d7341e8a63105586efe54fa2508ee087f328"},
-    {file = "pandas-1.5.3-cp311-cp311-macosx_10_9_universal2.whl", hash = "sha256:6973549c01ca91ec96199e940495219c887ea815b2083722821f1d7abfa2b4dc"},
-    {file = "pandas-1.5.3-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:c39a8da13cede5adcd3be1182883aea1c925476f4e84b2807a46e2775306305d"},
-    {file = "pandas-1.5.3-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:f76d097d12c82a535fda9dfe5e8dd4127952b45fea9b0276cb30cca5ea313fbc"},
-    {file = "pandas-1.5.3-cp311-cp311-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:e474390e60ed609cec869b0da796ad94f420bb057d86784191eefc62b65819ae"},
-    {file = "pandas-1.5.3-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:5f2b952406a1588ad4cad5b3f55f520e82e902388a6d5a4a91baa8d38d23c7f6"},
-    {file = "pandas-1.5.3-cp311-cp311-win_amd64.whl", hash = "sha256:bc4c368f42b551bf72fac35c5128963a171b40dce866fb066540eeaf46faa003"},
-    {file = "pandas-1.5.3-cp38-cp38-macosx_10_9_universal2.whl", hash = "sha256:14e45300521902689a81f3f41386dc86f19b8ba8dd5ac5a3c7010ef8d2932813"},
-    {file = "pandas-1.5.3-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:9842b6f4b8479e41968eced654487258ed81df7d1c9b7b870ceea24ed9459b31"},
-    {file = "pandas-1.5.3-cp38-cp38-macosx_11_0_arm64.whl", hash = "sha256:26d9c71772c7afb9d5046e6e9cf42d83dd147b5cf5bcb9d97252077118543792"},
-    {file = "pandas-1.5.3-cp38-cp38-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:5fbcb19d6fceb9e946b3e23258757c7b225ba450990d9ed63ccceeb8cae609f7"},
-    {file = "pandas-1.5.3-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:565fa34a5434d38e9d250af3c12ff931abaf88050551d9fbcdfafca50d62babf"},
-    {file = "pandas-1.5.3-cp38-cp38-win32.whl", hash = "sha256:87bd9c03da1ac870a6d2c8902a0e1fd4267ca00f13bc494c9e5a9020920e1d51"},
-    {file = "pandas-1.5.3-cp38-cp38-win_amd64.whl", hash = "sha256:41179ce559943d83a9b4bbacb736b04c928b095b5f25dd2b7389eda08f46f373"},
-    {file = "pandas-1.5.3-cp39-cp39-macosx_10_9_universal2.whl", hash = "sha256:c74a62747864ed568f5a82a49a23a8d7fe171d0c69038b38cedf0976831296fa"},
-    {file = "pandas-1.5.3-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:c4c00e0b0597c8e4f59e8d461f797e5d70b4d025880516a8261b2817c47759ee"},
-    {file = "pandas-1.5.3-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:a50d9a4336a9621cab7b8eb3fb11adb82de58f9b91d84c2cd526576b881a0c5a"},
-    {file = "pandas-1.5.3-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:dd05f7783b3274aa206a1af06f0ceed3f9b412cf665b7247eacd83be41cf7bf0"},
-    {file = "pandas-1.5.3-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:9f69c4029613de47816b1bb30ff5ac778686688751a5e9c99ad8c7031f6508e5"},
-    {file = "pandas-1.5.3-cp39-cp39-win32.whl", hash = "sha256:7cec0bee9f294e5de5bbfc14d0573f65526071029d036b753ee6507d2a21480a"},
-    {file = "pandas-1.5.3-cp39-cp39-win_amd64.whl", hash = "sha256:dfd681c5dc216037e0b0a2c821f5ed99ba9f03ebcf119c7dac0e9a7b960b9ec9"},
-    {file = "pandas-1.5.3.tar.gz", hash = "sha256:74a3fd7e5a7ec052f183273dc7b0acd3a863edf7520f5d3a1765c04ffdb3b0b1"},
-]
-
-[package.dependencies]
-numpy = [
-    {version = ">=1.21.0", markers = "python_version >= \"3.10\""},
-    {version = ">=1.23.2", markers = "python_version >= \"3.11\""},
-]
-python-dateutil = ">=2.8.1"
-pytz = ">=2020.1"
-
-[package.extras]
-test = ["hypothesis (>=5.5.3)", "pytest (>=6.0)", "pytest-xdist (>=1.31)"]
 
 [[package]]
 name = "pluggy"
@@ -672,33 +518,6 @@ files = [
 
 [package.dependencies]
 six = ">=1.5"
-
-[[package]]
-name = "pytkdocs"
-version = "0.16.1"
-description = "Load Python objects documentation."
-category = "dev"
-optional = false
-python-versions = ">=3.7"
-files = [
-    {file = "pytkdocs-0.16.1-py3-none-any.whl", hash = "sha256:a8c3f46ecef0b92864cc598e9101e9c4cf832ebbf228f50c84aa5dd850aac379"},
-    {file = "pytkdocs-0.16.1.tar.gz", hash = "sha256:e2ccf6dfe9dbbceb09818673f040f1a7c32ed0bffb2d709b06be6453c4026045"},
-]
-
-[package.extras]
-numpy-style = ["docstring_parser (>=0.7)"]
-
-[[package]]
-name = "pytz"
-version = "2022.7.1"
-description = "World timezone definitions, modern and historical"
-category = "dev"
-optional = false
-python-versions = "*"
-files = [
-    {file = "pytz-2022.7.1-py2.py3-none-any.whl", hash = "sha256:78f4f37d8198e0627c5f1143240bb0206b8691d8d7ac6d78fee88b78733f8c4a"},
-    {file = "pytz-2022.7.1.tar.gz", hash = "sha256:01a0681c4b9684a28304615eba55d1ab31ae00bf68ec157ec3708a8182dbbcd0"},
-]
 
 [[package]]
 name = "pyyaml"
@@ -925,21 +744,6 @@ files = [
 ]
 
 [[package]]
-name = "tabulate"
-version = "0.9.0"
-description = "Pretty-print tabular data"
-category = "dev"
-optional = false
-python-versions = ">=3.7"
-files = [
-    {file = "tabulate-0.9.0-py3-none-any.whl", hash = "sha256:024ca478df22e9340661486f85298cff5f6dcdba14f3813e8830015b9ed1948f"},
-    {file = "tabulate-0.9.0.tar.gz", hash = "sha256:0095b12bf5966de529c0feb1fa08671671b3368eec77d7ef7ab114be2c068b3c"},
-]
-
-[package.extras]
-widechars = ["wcwidth"]
-
-[[package]]
 name = "tomli"
 version = "2.0.1"
 description = "A lil' TOML parser"
@@ -1012,4 +816,4 @@ watchmedo = ["PyYAML (>=3.10)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "07142971d53b6cc85b2371a5e204f1090030cb4e13fb3c3b88b98f1f641fe936"
+content-hash = "d4605945067ed83dc7798877b447def90b77adabef513c433e4a25cc9f70f223"

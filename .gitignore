@@ -27,3 +27,6 @@ env.bak/
 __pycache__/
 *.pyo
 *.pyd
+
+# mkdocs
+site/
