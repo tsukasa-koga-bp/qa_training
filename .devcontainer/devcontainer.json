@@ -19,15 +19,16 @@
             },
             // Add the IDs of extensions you want installed when the container is created.
             "extensions": [
-                "ms-python.python",
-                "ms-python.vscode-pylance",
-                "bungcip.better-toml",
-                "janisdd.vscode-edit-csv",
-                "charliermarsh.ruff",
-                "njpwerner.autodocstring",
-                "VisualStudioExptTeam.vscodeintellicode",
-                "KevinRose.vsc-python-indent"
-            ]
+				"ms-python.python",
+				"ms-python.vscode-pylance",
+				"bungcip.better-toml",
+				"janisdd.vscode-edit-csv",
+				"charliermarsh.ruff",
+				"njpwerner.autodocstring",
+				"VisualStudioExptTeam.vscodeintellicode",
+				"KevinRose.vsc-python-indent",
+				"nopeslide.vscode-drawio-plugin-mermaid"
+			]
         }
     },
     // Use 'forwardPorts' to make a list of ports inside the container available locally.

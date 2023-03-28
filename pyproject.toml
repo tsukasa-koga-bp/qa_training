@@ -16,6 +16,7 @@ pytest = "^7.2.2"
 ruff = "^0.0.257"
 mkdocs = "^1.4.2"
 mkdocs-material = "^9.1.3"
+mkdocs-glightbox = "^0.3.2"
 mkdocs-drawio-exporter = "^0.8.0"
 
 [build-system]
