@@ -22,7 +22,7 @@ markdown_extensions:
   - pymdownx.details
   - pymdownx.magiclink
   - pymdownx.snippets:
-      check_paths: true
+      #check_paths: true
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid
@@ -30,7 +30,7 @@ markdown_extensions:
           format: !!python/name:pymdownx.superfences.fence_code_format
 
 plugins:
-  - glightbox
+  #- glightbox
   - drawio-exporter:
       cache_dir: "drawio-exporter"
       drawio_executable: null
