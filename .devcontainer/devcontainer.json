@@ -28,7 +28,8 @@
 				"VisualStudioExptTeam.vscodeintellicode",
 				"KevinRose.vsc-python-indent",
 				"nopeslide.vscode-drawio-plugin-mermaid",
-				"eamodio.gitlens"
+				"eamodio.gitlens",
+				"mhutchie.git-graph"
 			]
         }
     },
