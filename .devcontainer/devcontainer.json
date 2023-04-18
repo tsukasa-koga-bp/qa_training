@@ -27,7 +27,8 @@
 				"njpwerner.autodocstring",
 				"VisualStudioExptTeam.vscodeintellicode",
 				"KevinRose.vsc-python-indent",
-				"nopeslide.vscode-drawio-plugin-mermaid"
+				"nopeslide.vscode-drawio-plugin-mermaid",
+				"eamodio.gitlens"
 			]
         }
     },

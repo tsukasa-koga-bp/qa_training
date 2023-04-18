@@ -6,8 +6,6 @@ use_directory_urls: false
 
 nav:
   - ホーム: index.md
-  - 要求: requirements.md
-  - ドメインモデル: domain_model.md
 
 theme:
   name: material
@@ -31,6 +29,8 @@ markdown_extensions:
 
 plugins:
   #- glightbox
+  - search
+  - table-reader
   - drawio-exporter:
       cache_dir: "drawio-exporter"
       drawio_executable: null
@@ -38,3 +38,6 @@ plugins:
       format: svg
       embed_format: "{img_open}{img_src}{img_close}"
       sources: "*.drawio"
+  - literate-nav:
+      nav_file: README.md
+      implicit_index: true
