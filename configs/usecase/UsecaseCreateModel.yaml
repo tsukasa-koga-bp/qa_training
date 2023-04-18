@@ -1,0 +1,4 @@
+IF_UsecaseCreateModel:
+  classname: UsecaseCreateModel
+  params:
+    temp: temp

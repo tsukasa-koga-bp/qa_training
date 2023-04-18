@@ -21,6 +21,7 @@ mkdocs-glightbox = "^0.3.2"
 mkdocs-drawio-exporter = "^0.8.0"
 mkdocs-literate-nav = "^0.6.0"
 mkdocs-table-reader-plugin = "^2.0"
+pytest-html = "^3.2.0"
 
 [build-system]
 requires = ["poetry-core"]
