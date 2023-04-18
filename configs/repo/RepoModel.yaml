@@ -1,0 +1,4 @@
+IF_RepoModel:
+  classname: RepoModel
+  params:
+    temp: temp
