@@ -7,6 +7,6 @@ class IF_RepoFeatures(ABC):
     """
 
     @abstractmethod
-    def gene(self) -> None:
+    def initialize(self) -> None:
         """aaa"""
         pass

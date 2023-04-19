@@ -7,6 +7,6 @@ class IF_RepoModel(ABC):
     """
 
     @abstractmethod
-    def gene(self) -> None:
-        """aaa"""
+    def initialize(self) -> None:
+        """リポジトリを初期化する"""
         pass

@@ -6,6 +6,6 @@ class RepoRawData(IF_RepoRawData):
     def __init__(self, **kwargs) -> None:
         pass
 
-    @override(IF_RepoRawData.gene)
-    def gene(self) -> None:
+    @override(IF_RepoRawData.initialize)
+    def initialize(self) -> None:
         pass

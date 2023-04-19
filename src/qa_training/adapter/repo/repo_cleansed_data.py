@@ -6,6 +6,6 @@ class RepoCleansedData(IF_RepoCleansedData):
     def __init__(self, **kwargs) -> None:
         pass
 
-    @override(IF_RepoCleansedData.gene)
-    def gene(self) -> None:
+    @override(IF_RepoCleansedData.initialize)
+    def initialize(self) -> None:
         pass

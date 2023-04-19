@@ -6,6 +6,6 @@ class RepoModel(IF_RepoModel):
     def __init__(self, **kwargs) -> None:
         pass
 
-    @override(IF_RepoModel.gene)
-    def gene(self) -> None:
+    @override(IF_RepoModel.initialize)
+    def initialize(self) -> None:
         pass

@@ -29,6 +29,10 @@ class UsecaseJudgeSurvival(IF_UsecaseJudgeSurvival):
         self._repo_features = repo_features
         self._repo_model = repo_model
 
-    @override
-    def init_output(self) -> None:
+    @override(IF_UsecaseJudgeSurvival.judge_survival)
+    def judge_survival(self) -> bool:
+        return True
+
+    @override(IF_UsecaseJudgeSurvival.initialize)
+    def initialize(self) -> None:
         pass

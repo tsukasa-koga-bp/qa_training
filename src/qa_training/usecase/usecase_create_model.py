@@ -10,7 +10,6 @@ class UsecaseCreateModel(IF_UsecaseCreateModel):
 
     def __init__(self, repo_model: IF_RepoModel, **kwargs) -> None:
         assert isinstance(repo_model, IF_RepoModel)
-
         self._repo_model = repo_model
 
     @override

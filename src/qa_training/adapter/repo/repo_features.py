@@ -6,6 +6,6 @@ class RepoFeatures(IF_RepoFeatures):
     def __init__(self, **kwargs) -> None:
         pass
 
-    @override(IF_RepoFeatures.gene)
-    def gene(self) -> None:
+    @override(IF_RepoFeatures.initialize)
+    def initialize(self) -> None:
         pass

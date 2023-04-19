@@ -7,6 +7,6 @@ class IF_RepoRawData(ABC):
     """
 
     @abstractmethod
-    def gene(self) -> None:
-        """aaa"""
+    def initialize(self) -> None:
+        """初期化"""
         pass
