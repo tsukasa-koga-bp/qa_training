@@ -31,14 +31,8 @@ class DomainRegistry:
         ) = self._config_manager.params_for_usecase_judge_survival()
 
         if classname == UsecaseJudgeSurvival.__name__:
-            repo_raw_data = self.repo_raw_data()
-            repo_cleansed_repo = self.repo_cleansed_data()
-            repo_features = self.repo_features()
             repo_model = self.repo_model()
             return UsecaseJudgeSurvival(
-                repo_raw_data=repo_raw_data,
-                repo_cleansed_data=repo_cleansed_repo,
-                repo_features=repo_features,
                 repo_model=repo_model,
                 **dict_params,
             )
@@ -52,8 +46,14 @@ class DomainRegistry:
         ) = self._config_manager.params_for_usecase_create_model()
 
         if classname == UsecaseCreateModel.__name__:
+            repo_raw_data = self.repo_raw_data()
+            repo_cleansed_repo = self.repo_cleansed_data()
+            repo_features = self.repo_features()
             repo_model = self.repo_model()
             return UsecaseCreateModel(
+                repo_raw_data=repo_raw_data,
+                repo_cleansed_data=repo_cleansed_repo,
+                repo_features=repo_features,
                 repo_model=repo_model,
                 **dict_params,
             )
