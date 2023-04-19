@@ -6,6 +6,7 @@ from qa_training.utils.config_manager import (
     ConfigManagerRepoCommand,
     ConfigManagerUsecaseCommand,
 )
+from qa_training.utils.domain_registry import DomainRegistry
 
 params_yaml = {
     "default": (
@@ -47,9 +48,9 @@ def config_manager(
     return config_manager
 
 
-# @pytest.fixture
-# def domain_registry(config_manager: ConfigManager) -> DomainRegistry:
-#    return DomainRegistry(config_manager=config_manager)
+@pytest.fixture
+def domain_registry(config_manager: ConfigManager) -> DomainRegistry:
+    return DomainRegistry(config_manager=config_manager)
 
 
 def pytest_html_report_title(report):
