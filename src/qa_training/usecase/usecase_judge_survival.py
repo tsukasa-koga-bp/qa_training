@@ -16,14 +16,14 @@ class UsecaseJudgeSurvival(IF_UsecaseJudgeSurvival):
         self._repo_model = repo_model
 
     @override(IF_UsecaseJudgeSurvival.judge_survival)
-    def judge_survival(self, customer_info: CustomerInfo) -> bool:
+    def judge_survival(self, list_customer_info: list[CustomerInfo]) -> bool:
         # 特徴量作成
         service_make_features = ServiceMakeFeatures()
-        list_features = service_make_features.run(customer_info)
+        y, X = service_make_features.run(list_customer_info)  # noqa: N806
 
         # モデルで予測
         service_predict = ServicePredict(repo_model=self._repo_model)
-        list_survival = service_predict.run(list_features)
+        list_survival = service_predict.run(y, X)
         is_survival = list_survival[0]
 
         return is_survival
