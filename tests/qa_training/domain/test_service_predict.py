@@ -8,27 +8,23 @@ from qa_training.domain.service_predict import ServicePredict
 
 @pytest.fixture
 def fixture_run():
-    service_predict = ServicePredict(repo_model=RepoModel)
+    service_predict = ServicePredict(repo_model=RepoModel())
 
     df_X_and_y_expected = pd.read_csv(
         "./tests/qa_training/domain/data/df_X_and_y_expected.csv", sep="\t"
     )
     df_X = df_X_and_y_expected.drop("Survived", axis=1)
-    df_y = df_X_and_y_expected[["Survived"]]
     list_survival_expected = [True]
-    return service_predict, df_X, df_y, list_survival_expected
+    return service_predict, df_X, list_survival_expected
 
 
-def test_run(
-    fixture_run: Tuple[ServicePredict, pd.DataFrame, pd.DataFrame, list[bool]]
-):
+def test_run(fixture_run: Tuple[ServicePredict, pd.DataFrame, list[bool]]):
     (
         service_predict,
         df_X,
-        df_y,
         list_survival_expected,
     ) = fixture_run
 
-    list_survival = service_predict.run(df_X=df_X, df_y=df_y)
+    list_survival = service_predict.run(df_X=df_X)
 
     assert list_survival == list_survival_expected
