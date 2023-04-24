@@ -12,15 +12,12 @@ def fixture_run():
 
     df_customer_info = pd.read_csv(
         "./tests/common_data/df_customer_info.csv",
-        sep="\t",
     )
     df_X_expected = pd.read_csv(
         "./tests/common_data/df_X.csv",
-        sep="\t",
     )
     df_y_expected = pd.read_csv(
         "./tests/common_data/df_y.csv",
-        sep="\t",
     )
     return service_make_features, df_customer_info, df_X_expected, df_y_expected
 

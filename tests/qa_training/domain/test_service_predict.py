@@ -12,7 +12,6 @@ def fixture_run():
 
     df_X = pd.read_csv(
         "./tests/common_data/df_X.csv",
-        sep="\t",
     )
 
     list_survival_expected = [True]

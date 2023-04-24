@@ -10,7 +10,6 @@ def fixture_run():
     csv_path = "./tests/common_data/train.csv"
     df_customer_info_expected = pd.read_csv(
         "./tests/common_data/train.csv",
-        sep="\t",
     )
 
     return service_load_dataset, csv_path, df_customer_info_expected

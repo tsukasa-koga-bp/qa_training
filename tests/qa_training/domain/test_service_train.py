@@ -11,11 +11,9 @@ def fixture_run():
 
     df_X = pd.read_csv(
         "./tests/common_data/df_X.csv",
-        sep="\t",
     )
     df_y = pd.read_csv(
         "./tests/common_data/df_y.csv",
-        sep="\t",
     )
 
     return service_train, df_X, df_y
