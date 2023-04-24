@@ -1,23 +1,22 @@
 from typing import Tuple
 
 import pandas as pd
-from qa_training.domain.customer_info import CustomerInfo
 
 
 class ServiceMakeFeatures:
-    def run(
-        self, list_customer_info: list[CustomerInfo]
-    ) -> Tuple[pd.Series, pd.DataFrame]:
-        df_origin = self._convert_to_dataframe(list_customer_info)
+    def run(self, df_customer_info: pd.DataFrame) -> Tuple[pd.DataFrame, pd.DataFrame]:
+        df_X = self._make_X(df_customer_info)
+        df_y = self._make_y(df_customer_info)
+        return df_X, df_y
 
-        y = df_origin["Survived"]
-        X = pd.get_dummies(df_origin[["Pclass", "Sex", "SibSp", "Parch"]])  # noqa: N806
-        return y, X
+    def _make_X(self, df_customer_info: pd.DataFrame) -> pd.DataFrame:
+        # df_X = pd.get_dummies(df_customer_info[["Pclass", "Sex", "SibSp", "Parch"]])
+        df_X = df_customer_info[["Pclass", "Sex", "SibSp", "Parch"]]
+        return df_X
 
-    def _convert_to_dataframe(
-        self, list_customer_info: list[CustomerInfo]
-    ) -> pd.DataFrame:
-        return pd.DataFrame()
+    def _make_y(self, df_customer_info: pd.DataFrame) -> pd.DataFrame:
+        df_y = df_customer_info[["Survived"]]
+        return df_y
 
     """
     def _make_survived(self, df_origin: pd.DataFrame):

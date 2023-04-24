@@ -1,4 +1,4 @@
-from qa_training.domain.customer_info import CustomerInfo
+import pandas as pd
 from qa_training.domain.service_make_features import ServiceMakeFeatures
 from qa_training.domain.service_predict import ServicePredict
 from qa_training.utils.boundary.repo.if_repo_model import IF_RepoModel
@@ -16,14 +16,14 @@ class UsecaseJudgeSurvival(IF_UsecaseJudgeSurvival):
         self._repo_model = repo_model
 
     @override(IF_UsecaseJudgeSurvival.judge_survival)
-    def judge_survival(self, list_customer_info: list[CustomerInfo]) -> bool:
+    def judge_survival(self, df_customer_info: pd.DataFrame) -> bool:
         # 特徴量作成
         service_make_features = ServiceMakeFeatures()
-        y, X = service_make_features.run(list_customer_info)  # noqa: N806
+        X, y = service_make_features.run(df_customer_info)  # noqa: N806
 
         # モデルで予測
         service_predict = ServicePredict(repo_model=self._repo_model)
-        list_survival = service_predict.run(y, X)
+        list_survival = service_predict.run(X, y)
         is_survival = list_survival[0]
 
         return is_survival
