@@ -1,4 +1,0 @@
-IF_RepoFeatures:
-  classname: RepoFeatures
-  params:
-    temp: temp

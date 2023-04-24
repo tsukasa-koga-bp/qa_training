@@ -21,14 +21,5 @@ def test_params_for_usecase(config_manager: ConfigManager) -> None:
 def test_params_for_repo(config_manager: ConfigManager) -> None:
     """Repository関連のパラメータが正しく読み込めているか"""
 
-    classname, params = config_manager.params_for_repo_raw_data()
-    assert type(classname) is str and type(params) is dict
-
-    classname, params = config_manager.params_for_repo_cleansed_data()
-    assert type(classname) is str and type(params) is dict
-
-    classname, params = config_manager.params_for_repo_features()
-    assert type(classname) is str and type(params) is dict
-
     classname, params = config_manager.params_for_repo_model()
     assert type(classname) is str and type(params) is dict
