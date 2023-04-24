@@ -2,10 +2,7 @@ from typing import NamedTuple, Union, cast
 
 from omegaconf import DictConfig, ListConfig, OmegaConf
 
-from qa_training.utils.boundary.repo.if_repo_cleansed_data import IF_RepoCleansedData
-from qa_training.utils.boundary.repo.if_repo_features import IF_RepoFeatures
 from qa_training.utils.boundary.repo.if_repo_model import IF_RepoModel
-from qa_training.utils.boundary.repo.if_repo_raw_data import IF_RepoRawData
 from qa_training.utils.boundary.usecase.if_usecase_create_model import (
     IF_UsecaseCreateModel,
 )
