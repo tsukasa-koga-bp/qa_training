@@ -24,4 +24,5 @@ def fixture_run():
 def test_run(fixture_run):
     service_train, df_X, df_y = fixture_run
 
-    service_train.run(df_X, df_y)
+    is_success = service_train.run(df_X, df_y)
+    assert is_success

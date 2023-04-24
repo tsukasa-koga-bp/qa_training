@@ -13,6 +13,10 @@ class IF_RepoModel(ABC):
         pass
 
     @abstractmethod
+    def exist_model(self) -> bool:
+        pass
+
+    @abstractmethod
     def initialize(self) -> None:
         """リポジトリを初期化する"""
         pass
