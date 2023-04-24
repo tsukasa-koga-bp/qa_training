@@ -2,5 +2,5 @@ import pandas as pd
 
 
 class ServiceLoadDataset:
-    def load(self) -> pd.DataFrame:
+    def run(self, csv_path: str) -> pd.DataFrame:
         return pd.DataFrame()
