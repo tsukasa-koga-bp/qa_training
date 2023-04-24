@@ -8,5 +8,5 @@ class ServicePredict:
 
     def run(self, df_X: pd.DataFrame) -> list[bool]:  # noqa: N803
         model = self._repo_model.load()
-        df_y_predicted = model.predict(df_X)
+        model.predict(df_X)
         return [True]

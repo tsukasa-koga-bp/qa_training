@@ -1,4 +1,0 @@
-IF_RepoCleansedData:
-  classname: RepoCleansedData
-  params:
-    temp: temp

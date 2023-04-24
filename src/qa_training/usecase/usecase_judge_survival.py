@@ -19,7 +19,7 @@ class UsecaseJudgeSurvival(IF_UsecaseJudgeSurvival):
     def judge_survival(self, df_customer_info: pd.DataFrame) -> list[bool]:
         # 特徴量作成
         service_make_features = ServiceMakeFeatures()
-        df_X, _ = service_make_features.run(df_customer_info)  # noqa: N806
+        df_X, _ = service_make_features.run(df_customer_info)
 
         # モデルで予測
         service_predict = ServicePredict(repo_model=self._repo_model)
