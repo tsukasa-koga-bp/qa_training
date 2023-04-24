@@ -11,6 +11,10 @@ class RepoModel(IF_RepoModel):
     def load(self) -> MLModel:
         return MLModel()
 
+    @override(IF_RepoModel.exist_model)
+    def exist_model(self) -> bool:
+        return True
+
     @override(IF_RepoModel.initialize)
     def initialize(self) -> None:
         pass
