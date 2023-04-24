@@ -10,11 +10,11 @@ from qa_training.domain.service_predict import ServicePredict
 def fixture_run():
     service_predict = ServicePredict(repo_model=RepoModel())
 
-    df_X_and_y_expected = pd.read_csv(
-        "./tests/qa_training/domain/service_predict/data/df_X_and_y_expected.csv",
+    df_X = pd.read_csv(
+        "./tests/common_data/df_X.csv",
         sep="\t",
     )
-    df_X = df_X_and_y_expected.drop("Survived", axis=1)
+
     list_survival_expected = [True]
     return service_predict, df_X, list_survival_expected
 

@@ -9,12 +9,14 @@ def fixture_run():
     repo_model = RepoModel()
     service_train = ServiceTrain(repo_model=repo_model)
 
-    df_X_and_y_expected = pd.read_csv(
-        "./tests/qa_training/domain/service_train/data/df_X_and_y.csv",
+    df_X = pd.read_csv(
+        "./tests/common_data/df_X.csv",
         sep="\t",
     )
-    df_X = df_X_and_y_expected.drop("Survived", axis=1)
-    df_y = df_X_and_y_expected[["Survived"]]
+    df_y = pd.read_csv(
+        "./tests/common_data/df_y.csv",
+        sep="\t",
+    )
 
     return service_train, df_X, df_y
 
