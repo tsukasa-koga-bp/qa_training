@@ -11,10 +11,12 @@ def fixture_run():
     service_make_features = ServiceMakeFeatures()
 
     df_customer_info = pd.read_csv(
-        "./tests/qa_training/domain/data/df_customer_info.csv", sep="\t"
+        "./tests/qa_training/domain/test_service_make_features/data/df_customer_info.csv",
+        sep="\t",
     )
     df_X_and_y_expected = pd.read_csv(
-        "./tests/qa_training/domain/data/df_X_and_y_expected.csv", sep="\t"
+        "./tests/qa_training/domain/test_service_make_features/data/df_X_and_y_expected.csv",
+        sep="\t",
     )
     df_X_expected = df_X_and_y_expected.drop("Survived", axis=1)
     df_y_expected = df_X_and_y_expected[["Survived"]]
