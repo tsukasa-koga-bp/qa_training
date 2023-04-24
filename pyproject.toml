@@ -10,6 +10,7 @@ packages = [{include = "qa_training"}]
 python = "^3.10"
 numpy = "^1.24.2"
 omegaconf = "^2.3.0"
+pandas = "^2.0.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.2.2"
@@ -31,7 +32,7 @@ create = false
 
 [tool.ruff]
 select = ["E", "F", "I", "N"]
-ignore = ["N801"]
+ignore = ["N801", "N802", "N806"]
 line-length = 88
 target-version = "py310"
 

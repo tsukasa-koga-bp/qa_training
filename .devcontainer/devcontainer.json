@@ -15,22 +15,24 @@
                     "tests"
                 ],
                 "python.testing.unittestEnabled": false,
-                "python.testing.pytestEnabled": true
+                "python.testing.pytestEnabled": true,
+                "editor.formatOnSave": true,
+                "python.formatting.provider": "black"
             },
             // Add the IDs of extensions you want installed when the container is created.
             "extensions": [
-				"ms-python.python",
-				"ms-python.vscode-pylance",
-				"bungcip.better-toml",
-				"janisdd.vscode-edit-csv",
-				"charliermarsh.ruff",
-				"njpwerner.autodocstring",
-				"VisualStudioExptTeam.vscodeintellicode",
-				"KevinRose.vsc-python-indent",
-				"nopeslide.vscode-drawio-plugin-mermaid",
-				"eamodio.gitlens",
-				"mhutchie.git-graph"
-			]
+                "bungcip.better-toml",
+                "janisdd.vscode-edit-csv",
+                "charliermarsh.ruff",
+                "njpwerner.autodocstring",
+                "VisualStudioExptTeam.vscodeintellicode",
+                "KevinRose.vsc-python-indent",
+                "nopeslide.vscode-drawio-plugin-mermaid",
+                "eamodio.gitlens",
+                "mhutchie.git-graph",
+                "donjayamanne.python-extension-pack",
+                "ms-pyright.pyright"
+            ]
         }
     },
     // Use 'forwardPorts' to make a list of ports inside the container available locally.
