@@ -1,4 +1,4 @@
-from qa_training.adapter.repo.repo_model import RepoModel
+from qa_training.adapter.repo_model import RepoModel
 from qa_training.usecase.usecase_create_model import UsecaseCreateModel
 from qa_training.usecase.usecase_judge_survival import UsecaseJudgeSurvival
 from qa_training.utils.boundary.repo.if_repo_model import IF_RepoModel

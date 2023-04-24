@@ -1,6 +1,6 @@
 import pandas as pd
 import pytest
-from qa_training.adapter.repo.repo_model import RepoModel
+from qa_training.adapter.repo_model import RepoModel
 from qa_training.domain.service_train import ServiceTrain
 
 
