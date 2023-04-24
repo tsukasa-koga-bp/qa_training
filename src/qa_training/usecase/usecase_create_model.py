@@ -21,7 +21,7 @@ class UsecaseCreateModel(IF_UsecaseCreateModel):
     def create_model(self):
         # データ読み込み
         service_load_dataset = ServiceLoadDataset()
-        df_customer_info = service_load_dataset.load(self._csv_path)
+        df_customer_info = service_load_dataset.run(self._csv_path)
 
         # 特徴量作成
         service_make_features = ServiceMakeFeatures()
