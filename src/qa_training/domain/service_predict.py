@@ -6,7 +6,7 @@ class ServicePredict:
     def __init__(self, repo_model: IF_RepoModel) -> None:
         self._repo_model = repo_model
 
-    def run(self, df_X: pd.DataFrame) -> list[bool]:  # noqa: N803
+    def run(self, df_X: pd.DataFrame) -> pd.DataFrame:
         model = self._repo_model.load()
-        model.predict(df_X)
-        return [True]
+        df_y_pred = model.predict(df_X)
+        return df_y_pred

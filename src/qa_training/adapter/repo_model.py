@@ -1,20 +1,31 @@
+import os
+import pickle
+
 from qa_training.domain.ml_model import MLModel
 from qa_training.utils.boundary.repo.if_repo_model import IF_RepoModel
 from qa_training.utils.override_wrappter import override
 
 
 class RepoModel(IF_RepoModel):
-    def __init__(self, **kwargs) -> None:
-        pass
+    def __init__(self, model_path, **kwargs) -> None:
+        self._model_path = model_path
 
     @override(IF_RepoModel.load)
     def load(self) -> MLModel:
-        return MLModel()
+        with open(self._model_path, "rb") as file:
+            model = pickle.load(file)
+        return MLModel(model)
+
+    @override(IF_RepoModel.store)
+    def store(self, ml_model: MLModel) -> None:
+        with open(self._model_path, "wb") as file:
+            pickle.dump(ml_model.get_model(), file)
 
     @override(IF_RepoModel.exist_model)
     def exist_model(self) -> bool:
-        return True
+        return os.path.exists(self._model_path)
 
     @override(IF_RepoModel.initialize)
     def initialize(self) -> None:
-        pass
+        if self.exist_model():
+            os.remove(self._model_path)
