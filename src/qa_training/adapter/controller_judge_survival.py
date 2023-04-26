@@ -27,9 +27,7 @@ class ControllerJudgeSurvival:
         self._customer_info_csv_path = customer_info_csv_path
         self._output_path = output_path
 
-    def run(
-        self,
-    ):
+    def run(self):
         df_customer_info = self._load_df_customer_info(self._customer_info_csv_path)
 
         df_results = self._usecase.judge_survival(df_customer_info=df_customer_info)
