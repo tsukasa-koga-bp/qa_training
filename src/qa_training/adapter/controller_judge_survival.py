@@ -18,13 +18,11 @@ class ControllerJudgeSurvival:
         self,
         usecase_command: ConfigManagerUsecaseCommand,
         repo_command: ConfigManagerRepoCommand,
-        customer_info_csv_path: str,
         output_path: str,
     ) -> None:
         self._usecase = self._gene_usecase(
             usecase_command=usecase_command, repo_command=repo_command
         )
-        self._customer_info_csv_path = customer_info_csv_path
         self._output_path = output_path
 
     def run(self):
