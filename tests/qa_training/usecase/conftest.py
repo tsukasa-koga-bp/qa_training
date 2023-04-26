@@ -20,12 +20,10 @@ def fixture_judge_survival(
     fixture_create_model.create_model()
 
     usecase_judge_survival = domain_registry.usecase_judge_survival()
-    df_customer_info = pd.read_csv(
-        "./tests/common_data/df_customer_info.csv",
-    )
+
     df_results_expected = pd.read_csv(
         "./tests/common_data/df_results_expected.csv",
     )
 
-    yield usecase_judge_survival, df_customer_info, df_results_expected
+    yield usecase_judge_survival, df_results_expected
     usecase_judge_survival.initialize()

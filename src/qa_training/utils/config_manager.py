@@ -2,6 +2,7 @@ from typing import NamedTuple, cast
 
 from omegaconf import DictConfig, ListConfig, OmegaConf
 
+from qa_training.utils.boundary.repo.if_repo_input_data import IF_RepoInputData
 from qa_training.utils.boundary.repo.if_repo_model import IF_RepoModel
 from qa_training.utils.boundary.usecase.if_usecase_create_model import (
     IF_UsecaseCreateModel,
@@ -22,6 +23,7 @@ class ConfigManagerRepoCommand(NamedTuple):
     """各Repoクラスに対応したconfigのファイルパスの集合."""
 
     repo_model_yaml_path: str
+    repo_input_data_yaml_path: str
 
 
 class ConfigManager:
@@ -64,7 +66,6 @@ class ConfigManager:
         return self._convert_yaml(yaml, IF_UsecaseCreateModel.__name__)
 
     # Repository
-
     def params_for_repo_model(self):
         """モデルリポジトリのパラメータを返す.
 
@@ -73,3 +74,12 @@ class ConfigManager:
         """
         yaml = OmegaConf.load(self._repo_command.repo_model_yaml_path)
         return self._convert_yaml(yaml, IF_RepoModel.__name__)
+
+    def params_for_repo_input_data(self):
+        """入力データのリポジトリのパラメータを返す.
+
+        Returns:
+            _type_: _description_
+        """
+        yaml = OmegaConf.load(self._repo_command.repo_input_data_yaml_path)
+        return self._convert_yaml(yaml, IF_RepoInputData.__name__)

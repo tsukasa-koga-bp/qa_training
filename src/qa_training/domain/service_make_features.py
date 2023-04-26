@@ -30,8 +30,11 @@ class ServiceMakeFeatures:
         self, df_id: pd.DataFrame, df_customer_info: pd.DataFrame
     ) -> pd.DataFrame:
         df_y = pd.merge(df_id, df_customer_info, on="PassengerId", how="left")
-        df_y = df_y[["Survived"]]
 
+        if "Survived" not in df_y.columns:
+            return pd.DataFrame()
+
+        df_y = df_y[["Survived"]]
         return df_y
 
     def _handle_missing_values(self, df_customer_info) -> pd.DataFrame:

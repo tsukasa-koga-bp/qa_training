@@ -1,6 +1,7 @@
 import pandas as pd
 from qa_training.domain.service_make_features import ServiceMakeFeatures
 from qa_training.domain.service_predict import ServicePredict
+from qa_training.utils.boundary.repo.if_repo_input_data import IF_RepoInputData
 from qa_training.utils.boundary.repo.if_repo_model import IF_RepoModel
 from qa_training.utils.boundary.usecase.if_usecase_judge_survival import (
     IF_UsecaseJudgeSurvival,
@@ -11,12 +12,19 @@ from qa_training.utils.override_wrappter import override
 class UsecaseJudgeSurvival(IF_UsecaseJudgeSurvival):
     """生存判定ユースケース."""
 
-    def __init__(self, repo_model: IF_RepoModel, **kwargs) -> None:
+    def __init__(
+        self, repo_model: IF_RepoModel, repo_input_data: IF_RepoInputData, **kwargs
+    ) -> None:
         assert isinstance(repo_model, IF_RepoModel)
+        assert isinstance(repo_input_data, IF_RepoInputData)
         self._repo_model = repo_model
+        self._repo_input_data = repo_input_data
 
     @override(IF_UsecaseJudgeSurvival.judge_survival)
-    def judge_survival(self, df_customer_info: pd.DataFrame) -> pd.DataFrame:
+    def judge_survival(self) -> pd.DataFrame:
+        # データ読み込み
+        df_customer_info = self._repo_input_data.load_test()
+
         # 特徴量作成
         service_make_features = ServiceMakeFeatures()
         df_id, df_X, _ = service_make_features.run(df_customer_info)

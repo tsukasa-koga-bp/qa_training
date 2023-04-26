@@ -9,7 +9,7 @@ class IF_UsecaseJudgeSurvival(ABC):
     """
 
     @abstractmethod
-    def judge_survival(self, df_customer_info: pd.DataFrame) -> pd.DataFrame:
+    def judge_survival(self) -> pd.DataFrame:
         """生存を判定する."""
 
     @abstractmethod
