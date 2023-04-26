@@ -19,9 +19,7 @@ class ControllerCreateModel:
             usecase_command=usecase_command, repo_command=repo_command
         )
 
-    def run(
-        self,
-    ):
+    def run(self):
         self._usecase.create_model()
 
     def initialize(self):

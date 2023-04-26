@@ -1,3 +1,5 @@
+import os
+
 import pandas as pd
 
 from qa_training.utils.boundary.usecase.if_usecase_judge_survival import (
@@ -11,22 +13,32 @@ from qa_training.utils.config_manager import (
 from qa_training.utils.domain_registry import DomainRegistry
 
 
-class ControllerCreateModel:
-    def run(
+class ControllerJudgeSurvival:
+    def __init__(
         self,
         usecase_command: ConfigManagerUsecaseCommand,
         repo_command: ConfigManagerRepoCommand,
         customer_info_csv_path: str,
         output_path: str,
-    ):
-        usecase = self._gene_usecase(
+    ) -> None:
+        self._usecase = self._gene_usecase(
             usecase_command=usecase_command, repo_command=repo_command
         )
+        self._customer_info_csv_path = customer_info_csv_path
+        self._output_path = output_path
 
-        df_customer_info = self._load_df_customer_info(customer_info_csv_path)
+    def run(
+        self,
+    ):
+        df_customer_info = self._load_df_customer_info(self._customer_info_csv_path)
 
-        df_results = usecase.judge_survival(df_customer_info=df_customer_info)
-        self._output(output_path=output_path, df_results=df_results)
+        df_results = self._usecase.judge_survival(df_customer_info=df_customer_info)
+        self._output(output_path=self._output_path, df_results=df_results)
+
+    def initialize(self):
+        self._usecase.initialize()
+        if os.path.exists(self._output_path):
+            os.remove(self._output_path)
 
     def _output(self, output_path, df_results):
         df_results.to_csv(output_path, index=False)
