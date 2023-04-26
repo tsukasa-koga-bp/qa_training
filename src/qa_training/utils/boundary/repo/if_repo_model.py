@@ -22,5 +22,5 @@ class IF_RepoModel(ABC):
 
     @abstractmethod
     def initialize(self) -> None:
-        """リポジトリを初期化する"""
+        """リポジトリを初期化する."""
         pass

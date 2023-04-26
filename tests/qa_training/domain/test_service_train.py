@@ -1,5 +1,3 @@
-from typing import Tuple
-
 import pandas as pd
 import pytest
 from qa_training.domain.service_train import ServiceTrain
@@ -22,7 +20,7 @@ def fixture_run(domain_registry: DomainRegistry):
     repo_model.initialize()
 
 
-def test_run(fixture_run: Tuple[ServiceTrain, pd.DataFrame, pd.DataFrame]):
+def test_run(fixture_run: tuple[ServiceTrain, pd.DataFrame, pd.DataFrame]):
     service_train, df_X, df_y = fixture_run
 
     is_success = service_train.run(df_X, df_y)
