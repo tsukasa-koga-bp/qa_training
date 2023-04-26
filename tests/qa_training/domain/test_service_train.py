@@ -6,8 +6,7 @@ from qa_training.utils.domain_registry import DomainRegistry
 
 @pytest.fixture
 def fixture_run(domain_registry: DomainRegistry):
-    repo_model = domain_registry.repo_model()
-    service_train = ServiceTrain(repo_model=repo_model)
+    service_train = ServiceTrain()
 
     df_X = pd.read_csv(
         "./tests/common_data/df_X.csv",
@@ -16,8 +15,7 @@ def fixture_run(domain_registry: DomainRegistry):
         "./tests/common_data/df_y.csv",
     )
 
-    yield service_train, df_X, df_y
-    repo_model.initialize()
+    return service_train, df_X, df_y
 
 
 def test_run(fixture_run: tuple[ServiceTrain, pd.DataFrame, pd.DataFrame]):

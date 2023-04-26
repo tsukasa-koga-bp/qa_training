@@ -28,7 +28,7 @@ class UsecaseCreateModel(IF_UsecaseCreateModel):
         _, df_X, df_y = service_make_features.run(df_customer_info)
 
         # 学習
-        service_train = ServiceTrain(repo_model=self._repo_model)
+        service_train = ServiceTrain()
         ml_model = service_train.run(df_X, df_y)
 
         # モデルを保存

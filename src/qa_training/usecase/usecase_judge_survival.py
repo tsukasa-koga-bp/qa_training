@@ -21,9 +21,12 @@ class UsecaseJudgeSurvival(IF_UsecaseJudgeSurvival):
         service_make_features = ServiceMakeFeatures()
         df_id, df_X, _ = service_make_features.run(df_customer_info)
 
+        # モデルをロード
+        ml_model = self._repo_model.load()
+
         # モデルで予測
-        service_predict = ServicePredict(repo_model=self._repo_model)
-        df_y_pred = service_predict.run(df_X)
+        service_predict = ServicePredict()
+        df_y_pred = service_predict.run(df_X=df_X, ml_model=ml_model)
 
         # 結果作成
         df_results = pd.concat([df_id, df_X, df_y_pred], axis=1)
