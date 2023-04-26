@@ -4,10 +4,12 @@ import pandas as pd
 
 
 class ServiceMakeFeatures:
-    def run(self, df_customer_info: pd.DataFrame) -> Tuple[pd.DataFrame, pd.DataFrame]:
+    def run(
+        self, df_customer_info: pd.DataFrame
+    ) -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
         df_X, df_id = self._make_X(df_customer_info)
         df_y = self._make_y(df_id=df_id, df_customer_info=df_customer_info)
-        return df_X, df_y
+        return df_id, df_X, df_y
 
     def _make_X(
         self, df_customer_info: pd.DataFrame

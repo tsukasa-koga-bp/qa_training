@@ -23,10 +23,9 @@ def fixture_judge_survival(
     df_customer_info = pd.read_csv(
         "./tests/common_data/df_customer_info.csv",
     )
-    df_y_pred_expected = pd.read_csv(
-        "./tests/common_data/df_y_pred_expected.csv",
+    df_results_expected = pd.read_csv(
+        "./tests/common_data/df_results_expected.csv",
     )
-    list_survival_expected: list[bool] = df_y_pred_expected["Survived"].to_list()
 
-    yield usecase_judge_survival, df_customer_info, list_survival_expected
+    yield usecase_judge_survival, df_customer_info, df_results_expected
     usecase_judge_survival.initialize()

@@ -25,7 +25,7 @@ class UsecaseCreateModel(IF_UsecaseCreateModel):
 
         # 特徴量作成
         service_make_features = ServiceMakeFeatures()
-        df_X, df_y = service_make_features.run(df_customer_info)
+        _, df_X, df_y = service_make_features.run(df_customer_info)
 
         # 学習
         service_train = ServiceTrain(repo_model=self._repo_model)

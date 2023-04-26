@@ -16,16 +16,19 @@ class UsecaseJudgeSurvival(IF_UsecaseJudgeSurvival):
         self._repo_model = repo_model
 
     @override(IF_UsecaseJudgeSurvival.judge_survival)
-    def judge_survival(self, df_customer_info: pd.DataFrame) -> list[bool]:
+    def judge_survival(self, df_customer_info: pd.DataFrame) -> pd.DataFrame:
         # 特徴量作成
         service_make_features = ServiceMakeFeatures()
-        df_X, _ = service_make_features.run(df_customer_info)
+        df_id, df_X, _ = service_make_features.run(df_customer_info)
 
         # モデルで予測
         service_predict = ServicePredict(repo_model=self._repo_model)
-        list_survival = service_predict.run(df_X)
+        df_y_pred = service_predict.run(df_X)
 
-        return list_survival
+        # 結果作成
+        df_results = pd.concat([df_id, df_X, df_y_pred], axis=1)
+
+        return df_results
 
     @override(IF_UsecaseJudgeSurvival.initialize)
     def initialize(self) -> None:
