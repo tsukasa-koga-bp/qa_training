@@ -1,5 +1,3 @@
-from typing import Tuple
-
 import pandas as pd
 import pytest
 from qa_training.domain.service_make_features import ServiceMakeFeatures
@@ -32,7 +30,7 @@ def fixture_run():
 
 
 def test_run(
-    fixture_run: Tuple[
+    fixture_run: tuple[
         ServiceMakeFeatures, pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame
     ]
 ):

@@ -1,4 +1,4 @@
-from typing import NamedTuple, Union, cast
+from typing import NamedTuple, cast
 
 from omegaconf import DictConfig, ListConfig, OmegaConf
 
@@ -19,7 +19,7 @@ class ConfigManagerUsecaseCommand(NamedTuple):
 
 
 class ConfigManagerRepoCommand(NamedTuple):
-    """各Repoクラスに対応したconfigのファイルパスの集合"""
+    """各Repoクラスに対応したconfigのファイルパスの集合."""
 
     repo_model_yaml_path: str
 
@@ -38,7 +38,7 @@ class ConfigManager:
         self._usecase_command = usecase_command
         self._repo_command = repo_command
 
-    def _convert_yaml(self, yaml: Union[DictConfig, ListConfig], type_name: str):
+    def _convert_yaml(self, yaml: DictConfig | ListConfig, type_name: str):
         cfg = cast(dict, OmegaConf.to_container(yaml))
         inner_cfg = cfg[type_name]
 
@@ -46,7 +46,7 @@ class ConfigManager:
 
     # Usecase
     def params_for_usecase_judge_survival(self) -> tuple[str, dict]:
-        """生存判定ユースケースのパラメータを返す
+        """生存判定ユースケースのパラメータを返す.
 
         Returns:
             tuple[str, dict]: _description_
@@ -55,7 +55,7 @@ class ConfigManager:
         return self._convert_yaml(yaml, IF_UsecaseJudgeSurvival.__name__)
 
     def params_for_usecase_create_model(self):
-        """モデル作成ユースケースのパラメータを返す
+        """モデル作成ユースケースのパラメータを返す.
 
         Returns:
             _type_: _description_
@@ -66,7 +66,7 @@ class ConfigManager:
     # Repository
 
     def params_for_repo_model(self):
-        """モデルリポジトリのパラメータを返す
+        """モデルリポジトリのパラメータを返す.
 
         Returns:
             _type_: _description_

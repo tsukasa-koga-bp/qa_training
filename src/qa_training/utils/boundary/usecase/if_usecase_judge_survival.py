@@ -10,8 +10,8 @@ class IF_UsecaseJudgeSurvival(ABC):
 
     @abstractmethod
     def judge_survival(self, df_customer_info: pd.DataFrame) -> pd.DataFrame:
-        """生存を判定する"""
+        """生存を判定する."""
 
     @abstractmethod
     def initialize(self) -> None:
-        """リポジトリを初期化する"""
+        """リポジトリを初期化する."""

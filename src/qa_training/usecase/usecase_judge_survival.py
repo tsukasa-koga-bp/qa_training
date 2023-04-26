@@ -9,7 +9,7 @@ from qa_training.utils.override_wrappter import override
 
 
 class UsecaseJudgeSurvival(IF_UsecaseJudgeSurvival):
-    """生存判定ユースケース"""
+    """生存判定ユースケース."""
 
     def __init__(self, repo_model: IF_RepoModel, **kwargs) -> None:
         assert isinstance(repo_model, IF_RepoModel)

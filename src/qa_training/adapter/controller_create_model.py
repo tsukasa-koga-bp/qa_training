@@ -10,16 +10,22 @@ from qa_training.utils.domain_registry import DomainRegistry
 
 
 class ControllerCreateModel:
-    def run(
+    def __init__(
         self,
         usecase_command: ConfigManagerUsecaseCommand,
         repo_command: ConfigManagerRepoCommand,
-    ):
-        usecase = self._gene_usecase(
+    ) -> None:
+        self._usecase = self._gene_usecase(
             usecase_command=usecase_command, repo_command=repo_command
         )
 
-        usecase.create_model()
+    def run(
+        self,
+    ):
+        self._usecase.create_model()
+
+    def initialize(self):
+        self._usecase.initialize()
 
     def _gene_usecase(
         self,

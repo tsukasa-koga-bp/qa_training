@@ -1,5 +1,3 @@
-from typing import Tuple
-
 import pandas as pd
 import pytest
 from qa_training.domain.service_predict import ServicePredict
@@ -30,7 +28,7 @@ def fixture_run(domain_registry: DomainRegistry):
     repo_model.initialize()
 
 
-def test_run(fixture_run: Tuple[ServicePredict, pd.DataFrame, pd.DataFrame]):
+def test_run(fixture_run: tuple[ServicePredict, pd.DataFrame, pd.DataFrame]):
     (
         service_predict,
         df_X,

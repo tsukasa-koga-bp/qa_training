@@ -10,15 +10,14 @@ from qa_training.utils.domain_registry import DomainRegistry
 
 
 def test_domain_registry_initialize(config_manager: ConfigManager) -> None:
-    """DomainRegistryの初期化できるか"""
+    """DomainRegistryの初期化できるか."""
     domain_registry = DomainRegistry(config_manager)
     assert isinstance(domain_registry, DomainRegistry)
 
 
 # Usecase
 def test_usecase(domain_registry: DomainRegistry) -> None:
-    """DomainRegistryがUsecaseを正常に生成できるか"""
-
+    """DomainRegistryがUsecaseを正常に生成できるか."""
     usecase_judge_survival = domain_registry.usecase_judge_survival()
     assert isinstance(usecase_judge_survival, IF_UsecaseJudgeSurvival)
 
@@ -28,7 +27,6 @@ def test_usecase(domain_registry: DomainRegistry) -> None:
 
 # repo
 def test_repo(domain_registry: DomainRegistry) -> None:
-    """DomainRegistryがrepoを正常に生成できるか"""
-
+    """DomainRegistryがrepoを正常に生成できるか."""
     repo_model = domain_registry.repo_model()
     assert isinstance(repo_model, IF_RepoModel)

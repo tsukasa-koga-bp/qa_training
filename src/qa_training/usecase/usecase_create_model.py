@@ -9,7 +9,7 @@ from qa_training.utils.override_wrappter import override
 
 
 class UsecaseCreateModel(IF_UsecaseCreateModel):
-    """モデル作成ユースケース"""
+    """モデル作成ユースケース."""
 
     def __init__(self, repo_model: IF_RepoModel, csv_path: str, **kwargs) -> None:
         assert isinstance(repo_model, IF_RepoModel)
