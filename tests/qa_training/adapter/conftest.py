@@ -50,7 +50,6 @@ def fixture_judge_survival(
     controller_judge_survival = ControllerJudgeSurvival(
         usecase_command=usecase_command,
         repo_command=repo_command,
-        output_path="tests/output/df_results.csv",
     )
 
     yield controller_judge_survival
