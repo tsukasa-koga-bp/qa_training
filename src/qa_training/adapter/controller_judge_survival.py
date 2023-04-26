@@ -11,7 +11,7 @@ from qa_training.utils.config_manager import (
 from qa_training.utils.domain_registry import DomainRegistry
 
 
-class ControlerCreateModel:
+class ControllerCreateModel:
     def run(
         self,
         usecase_command: ConfigManagerUsecaseCommand,
