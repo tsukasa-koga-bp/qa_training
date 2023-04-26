@@ -22,7 +22,8 @@ def fixture_run(domain_registry: DomainRegistry):
         "./tests/common_data/df_y_pred_expected.csv",
     )
 
-    service_train.run(df_X, df_y)
+    ml_model = service_train.run(df_X, df_y)
+    repo_model.store(ml_model=ml_model)
 
     yield service_predict, df_X, df_y_pred_expected
     repo_model.initialize()

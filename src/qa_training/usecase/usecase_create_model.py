@@ -18,7 +18,7 @@ class UsecaseCreateModel(IF_UsecaseCreateModel):
         self._csv_path = csv_path
 
     @override(IF_UsecaseCreateModel.create_model)
-    def create_model(self):
+    def create_model(self) -> None:
         # データ読み込み
         service_load_dataset = ServiceLoadDataset()
         df_customer_info = service_load_dataset.run(self._csv_path)
@@ -29,7 +29,10 @@ class UsecaseCreateModel(IF_UsecaseCreateModel):
 
         # 学習
         service_train = ServiceTrain(repo_model=self._repo_model)
-        service_train.run(df_X, df_y)
+        ml_model = service_train.run(df_X, df_y)
+
+        # モデルを保存
+        self._repo_model.store(ml_model)
 
     @override(IF_UsecaseCreateModel.initialize)
     def initialize(self) -> None:
