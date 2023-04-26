@@ -34,3 +34,4 @@ site/
 
 # data
 data/**/*.csv
+data/**/*.pkl
