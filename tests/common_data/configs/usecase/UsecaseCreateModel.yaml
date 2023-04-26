@@ -1,0 +1,4 @@
+IF_UsecaseCreateModel:
+  classname: UsecaseCreateModel
+  params:
+    csv_path: "tests/common_data/train.csv"

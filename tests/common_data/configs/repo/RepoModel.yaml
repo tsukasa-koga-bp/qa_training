@@ -1,0 +1,4 @@
+IF_RepoModel:
+  classname: RepoModel
+  params:
+    model_path: "./tests/common_data/model.pkl"

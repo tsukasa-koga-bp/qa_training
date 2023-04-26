@@ -21,9 +21,6 @@ class ConfigManagerUsecaseCommand(NamedTuple):
 class ConfigManagerRepoCommand(NamedTuple):
     """各Repoクラスに対応したconfigのファイルパスの集合"""
 
-    repo_raw_data_yaml_path: str
-    repo_cleansed_data_yaml_path: str
-    repo_features_yaml_path: str
     repo_model_yaml_path: str
 
 

@@ -33,4 +33,4 @@ class UsecaseCreateModel(IF_UsecaseCreateModel):
 
     @override(IF_UsecaseCreateModel.initialize)
     def initialize(self) -> None:
-        pass
+        self._repo_model.initialize()
