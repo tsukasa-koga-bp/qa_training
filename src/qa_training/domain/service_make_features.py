@@ -57,6 +57,6 @@ class ServiceMakeFeatures:
         df_obeyed = df_obeyed[
             ["PassengerId", "Sex", "Embarked", "Pclass", "Age", "Fare"]
         ]
-        df_obeyed["Sex"] = df_obeyed["Sex"].replace({"male": 0, "female": 1})
+        df_obeyed.loc[:, "Sex"] = df_obeyed["Sex"].replace({"male": 0, "female": 1})
         df_obeyed = pd.get_dummies(df_obeyed, columns=["Embarked"], dtype=float)
         return df_obeyed

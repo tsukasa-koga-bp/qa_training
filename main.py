@@ -1,5 +1,12 @@
+import sys
+
 import click
-from qa_training.adapter.controller_create_model import ControllerCreateModel
+
+sys.path.append("src/")
+
+from qa_training.adapter.controller_create_model import (
+    ControllerCreateModel,
+)
 from qa_training.adapter.controller_judge_survival import ControllerJudgeSurvival
 from qa_training.utils.config_manager import (
     ConfigManagerRepoCommand,
@@ -16,17 +23,17 @@ from qa_training.utils.config_manager import (
 def main(
     enable_create_model: bool,
     enable_judge_survival: bool,
-    configs_path: str,
+    configs: str,
 ):
     usecase_command = ConfigManagerUsecaseCommand(
-        usecase_create_model_yaml_path=f"{configs_path}/usecase/UsecaseCreateModel.yaml",
-        usecase_judge_survival_yaml_path=f"{configs_path}/usecase/UsecaseJudgeSurvival.yaml",
+        usecase_create_model_yaml_path=f"{configs}/usecase/UsecaseCreateModel.yaml",
+        usecase_judge_survival_yaml_path=f"{configs}/usecase/UsecaseJudgeSurvival.yaml",
     )
 
     repo_command = ConfigManagerRepoCommand(
-        repo_input_data_yaml_path=f"{configs_path}/repo/RepoInputData.yaml",
-        repo_model_yaml_path=f"{configs_path}/repo/RepoModel.yaml",
-        repo_output_data_yaml_path=f"{configs_path}/repo/RepoOutputData.yaml",
+        repo_input_data_yaml_path=f"{configs}/repo/RepoInputData.yaml",
+        repo_model_yaml_path=f"{configs}/repo/RepoModel.yaml",
+        repo_output_data_yaml_path=f"{configs}/repo/RepoOutputData.yaml",
     )
 
     if enable_create_model:
