@@ -13,6 +13,10 @@ class IF_RepoModel(ABC):
         pass
 
     @abstractmethod
+    def store(self, ml_model: MLModel) -> None:
+        pass
+
+    @abstractmethod
     def exist_model(self) -> bool:
         pass
 

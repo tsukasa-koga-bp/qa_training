@@ -67,32 +67,6 @@ class ConfigManager:
         return self._convert_yaml(yaml, IF_UsecaseCreateModel.__name__)
 
     # Repository
-    def params_for_repo_raw_data(self):
-        """生データリポジトリのパラメータを返す
-
-        Returns:
-            _type_: _description_
-        """
-        yaml = OmegaConf.load(self._repo_command.repo_raw_data_yaml_path)
-        return self._convert_yaml(yaml, IF_RepoRawData.__name__)
-
-    def params_for_repo_cleansed_data(self):
-        """整形済みデータリポジトリのパラメータを返す
-
-        Returns:
-            _type_: _description_
-        """
-        yaml = OmegaConf.load(self._repo_command.repo_cleansed_data_yaml_path)
-        return self._convert_yaml(yaml, IF_RepoCleansedData.__name__)
-
-    def params_for_repo_features(self):
-        """特徴量リポジトリのパラメータを返す
-
-        Returns:
-            _type_: _description_
-        """
-        yaml = OmegaConf.load(self._repo_command.repo_features_yaml_path)
-        return self._convert_yaml(yaml, IF_RepoFeatures.__name__)
 
     def params_for_repo_model(self):
         """モデルリポジトリのパラメータを返す
