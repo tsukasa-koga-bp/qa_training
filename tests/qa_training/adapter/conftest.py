@@ -16,6 +16,7 @@ def usecase_and_repo_command():
     repo_command = ConfigManagerRepoCommand(
         repo_model_yaml_path="tests/common_data/configs/repo/RepoModel.yaml",
         repo_input_data_yaml_path="tests/common_data/configs/repo/RepoInputData.yaml",
+        repo_output_data_yaml_path="tests/common_data/configs/repo/RepoOutputData.yaml",
     )
     return usecase_command, repo_command
 

@@ -1,7 +1,5 @@
 from abc import ABC, abstractmethod
 
-import pandas as pd
-
 
 class IF_UsecaseJudgeSurvival(ABC):
     """生存判定ユースケースのインターフェースクラス.
@@ -9,7 +7,7 @@ class IF_UsecaseJudgeSurvival(ABC):
     """
 
     @abstractmethod
-    def judge_survival(self) -> pd.DataFrame:
+    def judge_survival(self) -> None:
         """生存を判定する."""
 
     @abstractmethod

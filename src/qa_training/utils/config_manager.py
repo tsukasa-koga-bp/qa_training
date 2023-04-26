@@ -4,6 +4,7 @@ from omegaconf import DictConfig, ListConfig, OmegaConf
 
 from qa_training.utils.boundary.repo.if_repo_input_data import IF_RepoInputData
 from qa_training.utils.boundary.repo.if_repo_model import IF_RepoModel
+from qa_training.utils.boundary.repo.if_repo_output_data import IF_RepoOutputData
 from qa_training.utils.boundary.usecase.if_usecase_create_model import (
     IF_UsecaseCreateModel,
 )
@@ -24,6 +25,7 @@ class ConfigManagerRepoCommand(NamedTuple):
 
     repo_model_yaml_path: str
     repo_input_data_yaml_path: str
+    repo_output_data_yaml_path: str
 
 
 class ConfigManager:
@@ -83,3 +85,12 @@ class ConfigManager:
         """
         yaml = OmegaConf.load(self._repo_command.repo_input_data_yaml_path)
         return self._convert_yaml(yaml, IF_RepoInputData.__name__)
+
+    def params_for_repo_output_data(self):
+        """出力データのリポジトリのパラメータを返す.
+
+        Returns:
+            _type_: _description_
+        """
+        yaml = OmegaConf.load(self._repo_command.repo_output_data_yaml_path)
+        return self._convert_yaml(yaml, IF_RepoOutputData.__name__)

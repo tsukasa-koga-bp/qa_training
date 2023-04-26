@@ -1,0 +1,4 @@
+IF_RepoOutputData:
+  classname: RepoOutputData
+  params:
+    output_csv_path: "tests/output/df_results.csv"

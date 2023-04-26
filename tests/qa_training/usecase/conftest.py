@@ -1,4 +1,3 @@
-import pandas as pd
 import pytest
 from qa_training.utils.boundary.usecase.if_usecase_create_model import (
     IF_UsecaseCreateModel,
@@ -21,9 +20,5 @@ def fixture_judge_survival(
 
     usecase_judge_survival = domain_registry.usecase_judge_survival()
 
-    df_results_expected = pd.read_csv(
-        "./tests/common_data/df_results_expected.csv",
-    )
-
-    yield usecase_judge_survival, df_results_expected
+    yield usecase_judge_survival
     usecase_judge_survival.initialize()
