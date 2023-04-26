@@ -11,14 +11,11 @@ from qa_training.utils.domain_registry import DomainRegistry
 params_yaml = {
     "default": (
         ConfigManagerUsecaseCommand(
-            usecase_create_model_yaml_path="configs/usecase/UsecaseCreateModel.yaml",
-            usecase_judge_survival_yaml_path="configs/usecase/UsecaseJudgeSurvival.yaml",
+            usecase_create_model_yaml_path="tests/common_data/configs/usecase/UsecaseCreateModel.yaml",
+            usecase_judge_survival_yaml_path="tests/common_data/configs/usecase/UsecaseJudgeSurvival.yaml",
         ),
         ConfigManagerRepoCommand(
-            repo_raw_data_yaml_path="configs/repo/RepoRawData.yaml",
-            repo_cleansed_data_yaml_path="configs/repo/RepoCleansedData.yaml",
-            repo_features_yaml_path="configs/repo/RepoFeatures.yaml",
-            repo_model_yaml_path="configs/repo/RepoModel.yaml",
+            repo_model_yaml_path="tests/common_data/configs/repo/RepoModel.yaml",
         ),
     ),
 }
