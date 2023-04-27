@@ -100,5 +100,5 @@ class ServiceMakeFeatures:
         df_obeyed.loc[:, "Sex"] = (
             df_obeyed["Sex"].replace({"male": 0, "female": 1}).astype("int64")
         )
-        df_obeyed = pd.get_dummies(df_obeyed, columns=["Embarked"], dtype=float)
-        return df_obeyed
+        df_X_and_id = pd.get_dummies(df_obeyed, columns=["Embarked"], dtype=float)
+        return df_X_and_id
