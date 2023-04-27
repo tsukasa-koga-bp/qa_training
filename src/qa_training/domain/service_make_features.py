@@ -52,8 +52,10 @@ class ServiceMakeFeatures:
 
     def _handle_missing_values(self, df_customer_info) -> pd.DataFrame:
         """欠損値処理する."""
-        df_customer_info["Age"] = df_customer_info["Age"].fillna(10)
-        df_customer_info["Cabin"] = df_customer_info["Cabin"].fillna("S")
+        df_customer_info["Sex"] = df_customer_info["Sex"].fillna(0)
+        df_customer_info["Age"] = df_customer_info["Age"].fillna(20)
+        df_customer_info["Embarked"] = df_customer_info["Embarked"].fillna("S")
+        df_customer_info["Pclass"] = df_customer_info["Pclass"].fillna(2)
         df_customer_info = df_customer_info.dropna()
         return df_customer_info
 
