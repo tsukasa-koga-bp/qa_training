@@ -36,3 +36,38 @@ def test_make_features_of_sex(
     df_X_and_id = service_make_features._make_features(df_obeyed)
 
     MyAssert().assert_df(df_X_and_id[["Sex"]], df_X_and_id_expected[["Sex"]])
+
+
+@pytest.fixture
+def fixture_make_features_of_embarked():
+    service_make_features = ServiceMakeFeatures()
+
+    dir_path = "make_features_of_embarked"
+
+    df_obeyed = pd.read_csv(f"{test_data_common_path}/{dir_path}/df_obeyed.csv")
+    df_X_and_id_expected = pd.read_csv(
+        f"{test_data_common_path}/{dir_path}/df_X_and_id_expected.csv"
+    )
+
+    return (service_make_features, df_obeyed, df_X_and_id_expected)
+
+
+def test_make_features_of_embarked(
+    fixture_make_features_of_embarked: tuple[
+        ServiceMakeFeatures, pd.DataFrame, pd.DataFrame
+    ]
+):
+    """特徴量, embarkedがone hot encodingされること"""
+
+    (
+        service_make_features,
+        df_obeyed,
+        df_X_and_id_expected,
+    ) = fixture_make_features_of_embarked
+
+    df_X_and_id = service_make_features._make_features(df_obeyed)
+
+    MyAssert().assert_df(
+        df_X_and_id[["Embarked_C", "Embarked_Q", "Embarked_S"]],
+        df_X_and_id_expected[["Embarked_C", "Embarked_Q", "Embarked_S"]],
+    )
