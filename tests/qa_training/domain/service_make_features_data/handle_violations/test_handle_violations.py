@@ -3,16 +3,22 @@ import pytest
 from qa_training.domain.service_make_features import ServiceMakeFeatures
 from qa_training.utils.my_assert_frame_equal import MyAssert
 
+test_data_common_path = (
+    "tests/qa_training/domain/service_make_features_data/handle_violations"
+)
+
 
 @pytest.fixture
 def fixture_handle_violations_in_pclass():
     service_make_features = ServiceMakeFeatures()
 
+    dir_path = "handle_violations_in_pclass"
+
     df_customer_info = pd.read_csv(
-        "tests/qa_training/domain/service_make_features_data/handle_violations_in_pclass/df_customer_info.csv",
+        f"{test_data_common_path}/{dir_path}/df_customer_info.csv"
     )
     df_obeyed_expected = pd.read_csv(
-        "tests/qa_training/domain/service_make_features_data/handle_violations_in_pclass/df_obeyed_expected.csv",
+        f"{test_data_common_path}/{dir_path}/df_obeyed_expected.csv"
     )
 
     return (service_make_features, df_customer_info, df_obeyed_expected)
@@ -40,11 +46,13 @@ def test_handle_violations_in_pclass(
 def fixture_handle_violations_in_sex():
     service_make_features = ServiceMakeFeatures()
 
+    dir_path = "handle_violations_in_sex"
+
     df_customer_info = pd.read_csv(
-        "tests/qa_training/domain/service_make_features_data/handle_violations_in_sex/df_customer_info.csv",
+        f"{test_data_common_path}/{dir_path}/df_customer_info.csv"
     )
     df_obeyed_expected = pd.read_csv(
-        "tests/qa_training/domain/service_make_features_data/handle_violations_in_sex/df_obeyed_expected.csv",
+        f"{test_data_common_path}/{dir_path}/df_obeyed_expected.csv"
     )
 
     return (service_make_features, df_customer_info, df_obeyed_expected)
@@ -72,11 +80,13 @@ def test_handle_violations_in_sex(
 def fixture_handle_violations_in_age():
     service_make_features = ServiceMakeFeatures()
 
+    dir_path = "handle_violations_in_age"
+
     df_customer_info = pd.read_csv(
-        "tests/qa_training/domain/service_make_features_data/handle_violations_in_age/df_customer_info.csv",
+        f"{test_data_common_path}/{dir_path}/df_customer_info.csv"
     )
     df_obeyed_expected = pd.read_csv(
-        "tests/qa_training/domain/service_make_features_data/handle_violations_in_age/df_obeyed_expected.csv",
+        f"{test_data_common_path}/{dir_path}/df_obeyed_expected.csv"
     )
 
     return (service_make_features, df_customer_info, df_obeyed_expected)
@@ -104,11 +114,13 @@ def test_handle_violations_in_age(
 def fixture_handle_violations_in_fare():
     service_make_features = ServiceMakeFeatures()
 
+    dir_path = "handle_violations_in_fare"
+
     df_customer_info = pd.read_csv(
-        "tests/qa_training/domain/service_make_features_data/handle_violations_in_fare/df_customer_info.csv",
+        f"{test_data_common_path}/{dir_path}/df_customer_info.csv"
     )
     df_obeyed_expected = pd.read_csv(
-        "tests/qa_training/domain/service_make_features_data/handle_violations_in_fare/df_obeyed_expected.csv",
+        f"{test_data_common_path}/{dir_path}/df_obeyed_expected.csv"
     )
 
     return (service_make_features, df_customer_info, df_obeyed_expected)
@@ -136,11 +148,13 @@ def test_handle_violations_in_fare(
 def fixture_handle_violations_in_embarked():
     service_make_features = ServiceMakeFeatures()
 
+    dir_path = "handle_violations_in_embarked"
+
     df_customer_info = pd.read_csv(
-        "tests/qa_training/domain/service_make_features_data/handle_violations_in_embarked/df_customer_info.csv",
+        f"{test_data_common_path}/{dir_path}/df_customer_info.csv"
     )
     df_obeyed_expected = pd.read_csv(
-        "tests/qa_training/domain/service_make_features_data/handle_violations_in_embarked/df_obeyed_expected.csv",
+        f"{test_data_common_path}/{dir_path}/df_obeyed_expected.csv"
     )
 
     return (service_make_features, df_customer_info, df_obeyed_expected)
