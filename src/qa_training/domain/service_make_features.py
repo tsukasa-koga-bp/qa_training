@@ -56,19 +56,20 @@ class ServiceMakeFeatures:
         df_customer_info["Age"] = df_customer_info["Age"].fillna(20)
         df_customer_info["Embarked"] = df_customer_info["Embarked"].fillna("S")
         df_customer_info["Pclass"] = df_customer_info["Pclass"].fillna(2)
-        df_customer_info = df_customer_info.dropna().reset_index(drop=True)
-        return df_customer_info
+        df_filled = df_customer_info.dropna()
+        return df_filled.reset_index(drop=True)
 
     def _handle_violations(self, df_filled) -> pd.DataFrame:
         """制約違反を処理する."""
         df_filled = df_filled[df_filled["Pclass"].isin([1, 2, 3])]
         df_filled = df_filled[df_filled["Sex"].isin(["male", "female"])]
         df_filled = df_filled[
-            (df_filled["Age"] >= 0) & (df_filled["Age"].apply(float.is_integer))
+            (df_filled["Age"] >= 0)
+            & (df_filled["Age"].apply(lambda x: float.is_integer(float(x))))
         ]
-        df_filled = df_filled[df_filled["Embarked"].isin(["C", "Q", "S"])]
+        df_obeyed = df_filled[df_filled["Embarked"].isin(["C", "Q", "S"])]
 
-        return df_filled
+        return df_obeyed.reset_index(drop=True)
 
     def _make_features(self, df_obeyed: pd.DataFrame) -> pd.DataFrame:
         """特徴量を作る."""
