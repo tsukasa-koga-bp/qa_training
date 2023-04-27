@@ -9,10 +9,10 @@ def fixture_run(domain_registry: DomainRegistry):
     service_train = ServiceTrain()
 
     df_X = pd.read_csv(
-        "./tests/common_data/df_X.csv",
+        "tests/common_data/df_X.csv",
     )
     df_y = pd.read_csv(
-        "./tests/common_data/df_y.csv",
+        "tests/common_data/df_y.csv",
     )
 
     return service_train, df_X, df_y
