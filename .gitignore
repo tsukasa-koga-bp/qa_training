@@ -31,3 +31,8 @@ __pycache__/
 # mkdocs
 docs/drawio-exporter
 site/
+
+# data
+data/**/*.csv
+data/**/*.pkl
+tests/output/*

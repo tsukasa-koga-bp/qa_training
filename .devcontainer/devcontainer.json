@@ -10,26 +10,57 @@
         "vscode": {
             // Set *default* container specific settings.json values on container create.
             "settings": {
+                "files.eol": "\n",
                 "python.defaultInterpreterPath": "/usr/local/py-utils/venvs/poetry/bin/python3.10",
                 "python.testing.pytestArgs": [
                     "tests"
                 ],
+                "python.linting.pylintEnabled": false,
+                "python.linting.enabled": true,
+                "python.linting.flake8Enabled": false,
+                "python.linting.lintOnSave": true,
+                "python.formatting.provider": "black",
+                "python.formatting.blackArgs": [
+                    "--line-length",
+                    "88"
+                ],
                 "python.testing.unittestEnabled": false,
-                "python.testing.pytestEnabled": true
+                "python.testing.nosetestsEnabled": false,
+                "python.testing.pytestEnabled": true,
+                "python.analysis.diagnosticMode": "workspace",
+                "python.jediEnabled": false,
+                "python.languageServer": "Pylance",
+                "python.analysis.typeCheckingMode": "basic",
+                "python.formatting.blackPath": "/usr/local/py-utils/venvs/poetry/bin/black",
+                "ruff.showNotifications": "always",
+                "vsintellicode.python.completionsEnabled": true,
+                "vsintellicode.features.python.deepLearning": "enabled",
+                "vsintellicode.modify.editor.suggestSelection": "enabled",
+                "editor.formatOnSave": true,
+                "editor.codeActionsOnSave": {
+                    "source.organizeImports": false,
+                    "source.fixAll": true
+                },
+                "[python]": {
+                    "editor.tabSize": 4,
+                    "editor.formatOnPaste": false
+                },
+                "autoDocstring.docstringFormat": "google",
+                "autoDocstring.startOnNewLine": true
             },
             // Add the IDs of extensions you want installed when the container is created.
             "extensions": [
-				"ms-python.python",
-				"ms-python.vscode-pylance",
-				"bungcip.better-toml",
-				"janisdd.vscode-edit-csv",
-				"charliermarsh.ruff",
-				"njpwerner.autodocstring",
-				"VisualStudioExptTeam.vscodeintellicode",
-				"KevinRose.vsc-python-indent",
-				"nopeslide.vscode-drawio-plugin-mermaid",
-				"eamodio.gitlens"
-			]
+                "bungcip.better-toml",
+                "janisdd.vscode-edit-csv",
+                "charliermarsh.ruff",
+                "njpwerner.autodocstring",
+                "VisualStudioExptTeam.vscodeintellicode",
+                "KevinRose.vsc-python-indent",
+                "eamodio.gitlens",
+                "mhutchie.git-graph",
+                "ms-python.python",
+                "ms-python.vscode-pylance"
+            ]
         }
     },
     // Use 'forwardPorts' to make a list of ports inside the container available locally.

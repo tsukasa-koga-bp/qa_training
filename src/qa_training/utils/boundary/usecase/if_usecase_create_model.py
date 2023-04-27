@@ -7,5 +7,10 @@ class IF_UsecaseCreateModel(ABC):
     """
 
     @abstractmethod
-    def init_output(self) -> None:
-        """ユースケースの実行による出力を初期化する"""
+    def create_model(self):
+        """モデル作成する."""
+        pass
+
+    @abstractmethod
+    def initialize(self) -> None:
+        """ユースケースの実行による出力を初期化する."""

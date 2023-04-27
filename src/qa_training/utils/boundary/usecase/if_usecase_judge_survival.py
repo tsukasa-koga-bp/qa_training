@@ -7,5 +7,9 @@ class IF_UsecaseJudgeSurvival(ABC):
     """
 
     @abstractmethod
-    def init_output(self) -> None:
-        """ユースケースの実行による出力を初期化する"""
+    def judge_survival(self) -> None:
+        """生存を判定する."""
+
+    @abstractmethod
+    def initialize(self) -> None:
+        """リポジトリを初期化する."""

@@ -1,0 +1,5 @@
+IF_RepoInputData:
+  classname: RepoInputData
+  params:
+    input_train_csv_path: "tests/common_data/train.csv"
+    input_test_csv_path: "tests/common_data/test.csv"

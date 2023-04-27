@@ -1,11 +1,10 @@
-from typing import NamedTuple, Union, cast
+from typing import NamedTuple, cast
 
 from omegaconf import DictConfig, ListConfig, OmegaConf
 
-from qa_training.utils.boundary.repo.if_repo_cleansed_data import IF_RepoCleansedData
-from qa_training.utils.boundary.repo.if_repo_features import IF_RepoFeatures
+from qa_training.utils.boundary.repo.if_repo_input_data import IF_RepoInputData
 from qa_training.utils.boundary.repo.if_repo_model import IF_RepoModel
-from qa_training.utils.boundary.repo.if_repo_raw_data import IF_RepoRawData
+from qa_training.utils.boundary.repo.if_repo_output_data import IF_RepoOutputData
 from qa_training.utils.boundary.usecase.if_usecase_create_model import (
     IF_UsecaseCreateModel,
 )
@@ -22,12 +21,11 @@ class ConfigManagerUsecaseCommand(NamedTuple):
 
 
 class ConfigManagerRepoCommand(NamedTuple):
-    """各Repoクラスに対応したconfigのファイルパスの集合"""
+    """各Repoクラスに対応したconfigのファイルパスの集合."""
 
-    repo_raw_data_yaml_path: str
-    repo_cleansed_data_yaml_path: str
-    repo_features_yaml_path: str
     repo_model_yaml_path: str
+    repo_input_data_yaml_path: str
+    repo_output_data_yaml_path: str
 
 
 class ConfigManager:
@@ -44,7 +42,7 @@ class ConfigManager:
         self._usecase_command = usecase_command
         self._repo_command = repo_command
 
-    def _convert_yaml(self, yaml: Union[DictConfig, ListConfig], type_name: str):
+    def _convert_yaml(self, yaml: DictConfig | ListConfig, type_name: str):
         cfg = cast(dict, OmegaConf.to_container(yaml))
         inner_cfg = cfg[type_name]
 
@@ -52,7 +50,7 @@ class ConfigManager:
 
     # Usecase
     def params_for_usecase_judge_survival(self) -> tuple[str, dict]:
-        """生存判定ユースケースのパラメータを返す
+        """生存判定ユースケースのパラメータを返す.
 
         Returns:
             tuple[str, dict]: _description_
@@ -61,7 +59,7 @@ class ConfigManager:
         return self._convert_yaml(yaml, IF_UsecaseJudgeSurvival.__name__)
 
     def params_for_usecase_create_model(self):
-        """モデル作成ユースケースのパラメータを返す
+        """モデル作成ユースケースのパラメータを返す.
 
         Returns:
             _type_: _description_
@@ -70,38 +68,29 @@ class ConfigManager:
         return self._convert_yaml(yaml, IF_UsecaseCreateModel.__name__)
 
     # Repository
-    def params_for_repo_raw_data(self):
-        """生データリポジトリのパラメータを返す
-
-        Returns:
-            _type_: _description_
-        """
-        yaml = OmegaConf.load(self._repo_command.repo_raw_data_yaml_path)
-        return self._convert_yaml(yaml, IF_RepoRawData.__name__)
-
-    def params_for_repo_cleansed_data(self):
-        """整形済みデータリポジトリのパラメータを返す
-
-        Returns:
-            _type_: _description_
-        """
-        yaml = OmegaConf.load(self._repo_command.repo_cleansed_data_yaml_path)
-        return self._convert_yaml(yaml, IF_RepoCleansedData.__name__)
-
-    def params_for_repo_features(self):
-        """特徴量リポジトリのパラメータを返す
-
-        Returns:
-            _type_: _description_
-        """
-        yaml = OmegaConf.load(self._repo_command.repo_features_yaml_path)
-        return self._convert_yaml(yaml, IF_RepoFeatures.__name__)
-
     def params_for_repo_model(self):
-        """モデルリポジトリのパラメータを返す
+        """モデルリポジトリのパラメータを返す.
 
         Returns:
             _type_: _description_
         """
         yaml = OmegaConf.load(self._repo_command.repo_model_yaml_path)
         return self._convert_yaml(yaml, IF_RepoModel.__name__)
+
+    def params_for_repo_input_data(self):
+        """入力データのリポジトリのパラメータを返す.
+
+        Returns:
+            _type_: _description_
+        """
+        yaml = OmegaConf.load(self._repo_command.repo_input_data_yaml_path)
+        return self._convert_yaml(yaml, IF_RepoInputData.__name__)
+
+    def params_for_repo_output_data(self):
+        """出力データのリポジトリのパラメータを返す.
+
+        Returns:
+            _type_: _description_
+        """
+        yaml = OmegaConf.load(self._repo_command.repo_output_data_yaml_path)
+        return self._convert_yaml(yaml, IF_RepoOutputData.__name__)

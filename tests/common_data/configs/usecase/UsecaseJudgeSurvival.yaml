@@ -1,0 +1,5 @@
+IF_UsecaseJudgeSurvival:
+  classname: UsecaseJudgeSurvival
+  params:
+    temp: temp
+    

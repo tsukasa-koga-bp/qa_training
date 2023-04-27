@@ -1,4 +1,0 @@
-IF_RepoRawData:
-  classname: RepoRawData
-  params:
-    temp: temp
