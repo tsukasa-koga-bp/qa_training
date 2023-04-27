@@ -34,3 +34,67 @@ def test_handle_violations_in_pclass(
     df_obeyed = service_make_features._handle_violations(df_customer_info)
 
     MyAssert().assert_df(df_obeyed, df_obeyed_expected)
+
+
+@pytest.fixture
+def fixture_handle_violations_in_sex():
+    service_make_features = ServiceMakeFeatures()
+
+    df_customer_info = pd.read_csv(
+        "tests/qa_training/domain/service_make_features_data/handle_violations_in_sex/df_customer_info.csv",
+    )
+    df_obeyed_expected = pd.read_csv(
+        "tests/qa_training/domain/service_make_features_data/handle_violations_in_sex/df_obeyed_expected.csv",
+    )
+
+    return (service_make_features, df_customer_info, df_obeyed_expected)
+
+
+def test_handle_violations_in_sex(
+    fixture_handle_violations_in_sex: tuple[
+        ServiceMakeFeatures, pd.DataFrame, pd.DataFrame
+    ]
+):
+    """制約違反処理, sexがmale, female以外の行が削除されること"""
+
+    (
+        service_make_features,
+        df_customer_info,
+        df_obeyed_expected,
+    ) = fixture_handle_violations_in_sex
+
+    df_obeyed = service_make_features._handle_violations(df_customer_info)
+
+    MyAssert().assert_df(df_obeyed, df_obeyed_expected)
+
+
+@pytest.fixture
+def fixture_handle_violations_in_age():
+    service_make_features = ServiceMakeFeatures()
+
+    df_customer_info = pd.read_csv(
+        "tests/qa_training/domain/service_make_features_data/handle_violations_in_age/df_customer_info.csv",
+    )
+    df_obeyed_expected = pd.read_csv(
+        "tests/qa_training/domain/service_make_features_data/handle_violations_in_age/df_obeyed_expected.csv",
+    )
+
+    return (service_make_features, df_customer_info, df_obeyed_expected)
+
+
+def test_handle_violations_in_age(
+    fixture_handle_violations_in_age: tuple[
+        ServiceMakeFeatures, pd.DataFrame, pd.DataFrame
+    ]
+):
+    """制約違反処理, ageが0以上130以下の整数であること"""
+
+    (
+        service_make_features,
+        df_customer_info,
+        df_obeyed_expected,
+    ) = fixture_handle_violations_in_age
+
+    df_obeyed = service_make_features._handle_violations(df_customer_info)
+
+    MyAssert().assert_df(df_obeyed, df_obeyed_expected)

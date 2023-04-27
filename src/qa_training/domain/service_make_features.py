@@ -63,9 +63,17 @@ class ServiceMakeFeatures:
         """制約違反を処理する."""
         df_filled = df_filled[df_filled["Pclass"].isin([1, 2, 3])]
         df_filled = df_filled[df_filled["Sex"].isin(["male", "female"])]
+
+        # age
+        age_upper = 130
+        age_under = 0
+        # 数値でフィルター
+        df_filled = df_filled[pd.to_numeric(df_filled["Age"], errors="coerce").notna()]
+        # 整数に変換
+        df_filled["Age"] = df_filled["Age"].apply(lambda x: round(float(x)))
+        # age_under以上, age_upper以下の整数でフィルター
         df_filled = df_filled[
-            (df_filled["Age"] >= 0)
-            & (df_filled["Age"].apply(lambda x: float.is_integer(float(x))))
+            (df_filled["Age"] >= age_under) & (df_filled["Age"] <= age_upper)
         ]
         df_obeyed = df_filled[df_filled["Embarked"].isin(["C", "Q", "S"])]
 

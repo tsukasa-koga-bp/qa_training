@@ -1,0 +1,7 @@
+PassengerId,Survived,Pclass,Name,Sex,Age,SibSp,Parch,Ticket,Fare,Cabin,Embarked
+1,0,1,"Braund, Mr. Owen Harris",ddddd,22,1,0,A/5 21171,7.25,C85,S
+2,0,1,"Braund, Mr. Owen Harris",male,22,1,0,A/5 21171,7.25,C85,S
+3,0,1,"Braund, Mr. Owen Harris",10,22,1,0,A/5 21171,7.25,C85,S
+4,0,1,"Braund, Mr. Owen Harris",female,22,1,0,A/5 21171,7.25,C85,S
+5,0,1,"Braund, Mr. Owen Harris",aaaaa,22,1,0,A/5 21171,7.25,C85,S
+6,0,1,"Braund, Mr. Owen Harris",-10000,22,1,0,A/5 21171,7.25,C85,S
