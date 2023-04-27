@@ -56,7 +56,7 @@ class ServiceMakeFeatures:
         df_customer_info["Age"] = df_customer_info["Age"].fillna(20)
         df_customer_info["Embarked"] = df_customer_info["Embarked"].fillna("S")
         df_customer_info["Pclass"] = df_customer_info["Pclass"].fillna(2)
-        df_customer_info = df_customer_info.dropna()
+        df_customer_info = df_customer_info.dropna().reset_index(drop=True)
         return df_customer_info
 
     def _handle_violations(self, df_filled) -> pd.DataFrame:
