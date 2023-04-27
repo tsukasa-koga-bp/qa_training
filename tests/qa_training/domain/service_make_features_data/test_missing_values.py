@@ -5,6 +5,38 @@ from qa_training.utils.my_assert_frame_equal import MyAssert
 
 
 @pytest.fixture
+def fixture_missing_values_in_sex():
+    service_make_features = ServiceMakeFeatures()
+
+    df_customer_info = pd.read_csv(
+        "tests/qa_training/domain/service_make_features_data/missing_values_in_sex/df_customer_info.csv",
+    )
+    df_filled_expected = pd.read_csv(
+        "tests/qa_training/domain/service_make_features_data/missing_values_in_sex/df_filled_expected.csv",
+    )
+
+    return (service_make_features, df_customer_info, df_filled_expected)
+
+
+def test_missing_values_in_sex(
+    fixture_missing_values_in_sex: tuple[
+        ServiceMakeFeatures, pd.DataFrame, pd.DataFrame
+    ]
+):
+    """欠損補完, Sexがmaleで埋まること"""
+
+    (
+        service_make_features,
+        df_customer_info,
+        df_filled_expected,
+    ) = fixture_missing_values_in_sex
+
+    df_filled = service_make_features._handle_missing_values(df_customer_info)
+
+    MyAssert().assert_df(df_filled, df_filled_expected)
+
+
+@pytest.fixture
 def fixture_missing_values_in_age():
     service_make_features = ServiceMakeFeatures()
 
@@ -69,31 +101,31 @@ def test_missing_values_in_embarked(
 
 
 @pytest.fixture
-def fixture_missing_values_in_sex():
+def fixture_missing_values_in_pclass():
     service_make_features = ServiceMakeFeatures()
 
     df_customer_info = pd.read_csv(
-        "tests/qa_training/domain/service_make_features_data/missing_values_in_sex/df_customer_info.csv",
+        "tests/qa_training/domain/service_make_features_data/missing_values_in_pclass/df_customer_info.csv",
     )
     df_filled_expected = pd.read_csv(
-        "tests/qa_training/domain/service_make_features_data/missing_values_in_sex/df_filled_expected.csv",
+        "tests/qa_training/domain/service_make_features_data/missing_values_in_pclass/df_filled_expected.csv",
     )
 
     return (service_make_features, df_customer_info, df_filled_expected)
 
 
-def test_missing_values_in_sex(
-    fixture_missing_values_in_sex: tuple[
+def test_missing_values_in_pclass(
+    fixture_missing_values_in_pclass: tuple[
         ServiceMakeFeatures, pd.DataFrame, pd.DataFrame
     ]
 ):
-    """欠損補完, Sexがmaleで埋まること"""
+    """欠損補完, Pclassが2で埋まること"""
 
     (
         service_make_features,
         df_customer_info,
         df_filled_expected,
-    ) = fixture_missing_values_in_sex
+    ) = fixture_missing_values_in_pclass
 
     df_filled = service_make_features._handle_missing_values(df_customer_info)
 
