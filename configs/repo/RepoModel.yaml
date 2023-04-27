@@ -1,4 +1,4 @@
 IF_RepoModel:
   classname: RepoModel
   params:
-    model_path: "./data/model/model.pkl"
+    model_path: "data/model/model.pkl"

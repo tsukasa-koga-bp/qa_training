@@ -21,3 +21,9 @@ def test_params_for_repo(config_manager: ConfigManager) -> None:
     """Repository関連のパラメータが正しく読み込めているか."""
     classname, params = config_manager.params_for_repo_model()
     assert type(classname) is str and type(params) is dict
+
+    classname, params = config_manager.params_for_repo_input_data()
+    assert type(classname) is str and type(params) is dict
+
+    classname, params = config_manager.params_for_repo_output_data()
+    assert type(classname) is str and type(params) is dict

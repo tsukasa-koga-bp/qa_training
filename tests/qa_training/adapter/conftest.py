@@ -15,6 +15,8 @@ def usecase_and_repo_command():
     )
     repo_command = ConfigManagerRepoCommand(
         repo_model_yaml_path="tests/common_data/configs/repo/RepoModel.yaml",
+        repo_input_data_yaml_path="tests/common_data/configs/repo/RepoInputData.yaml",
+        repo_output_data_yaml_path="tests/common_data/configs/repo/RepoOutputData.yaml",
     )
     return usecase_command, repo_command
 
@@ -48,8 +50,6 @@ def fixture_judge_survival(
     controller_judge_survival = ControllerJudgeSurvival(
         usecase_command=usecase_command,
         repo_command=repo_command,
-        customer_info_csv_path="tests/common_data/df_customer_info.csv",
-        output_path="tests/output/df_results.csv",
     )
 
     yield controller_judge_survival

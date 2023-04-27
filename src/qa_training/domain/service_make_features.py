@@ -19,7 +19,7 @@ class ServiceMakeFeatures:
         df_obeyed = self._handle_violations(df_filled=df_filled)
 
         # 特徴量作成
-        df_X_and_id = self._make_features(df_obeyed=df_obeyed)
+        df_X_and_id = self._make_features(df_obeyed=df_obeyed).reset_index(drop=True)
 
         df_X = df_X_and_id.drop("PassengerId", axis=1)
         df_id = df_X_and_id[["PassengerId"]]
@@ -29,10 +29,13 @@ class ServiceMakeFeatures:
     def _make_y(
         self, df_id: pd.DataFrame, df_customer_info: pd.DataFrame
     ) -> pd.DataFrame:
-        df_y = pd.merge(df_id, df_customer_info, on="PassengerId", how="left")
-        df_y = df_y[["Survived"]]
+        df_y = pd.merge(df_id, df_customer_info, on="PassengerId", how="inner")
 
-        return df_y
+        if "Survived" not in df_y.columns:
+            return pd.DataFrame()
+
+        df_y = df_y[["Survived"]]
+        return df_y.reset_index(drop=True)
 
     def _handle_missing_values(self, df_customer_info) -> pd.DataFrame:
         df_customer_info["Age"] = df_customer_info["Age"].fillna(10)
@@ -54,6 +57,6 @@ class ServiceMakeFeatures:
         df_obeyed = df_obeyed[
             ["PassengerId", "Sex", "Embarked", "Pclass", "Age", "Fare"]
         ]
-        df_obeyed["Sex"] = df_obeyed["Sex"].replace({"male": 0, "female": 1})
+        df_obeyed.loc[:, "Sex"] = df_obeyed["Sex"].replace({"male": 0, "female": 1})
         df_obeyed = pd.get_dummies(df_obeyed, columns=["Embarked"], dtype=float)
         return df_obeyed
