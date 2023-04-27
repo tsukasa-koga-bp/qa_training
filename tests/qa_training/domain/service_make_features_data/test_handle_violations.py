@@ -98,3 +98,35 @@ def test_handle_violations_in_age(
     df_obeyed = service_make_features._handle_violations(df_customer_info)
 
     MyAssert().assert_df(df_obeyed, df_obeyed_expected)
+
+
+@pytest.fixture
+def fixture_handle_violations_in_fare():
+    service_make_features = ServiceMakeFeatures()
+
+    df_customer_info = pd.read_csv(
+        "tests/qa_training/domain/service_make_features_data/handle_violations_in_fare/df_customer_info.csv",
+    )
+    df_obeyed_expected = pd.read_csv(
+        "tests/qa_training/domain/service_make_features_data/handle_violations_in_fare/df_obeyed_expected.csv",
+    )
+
+    return (service_make_features, df_customer_info, df_obeyed_expected)
+
+
+def test_handle_violations_in_fare(
+    fixture_handle_violations_in_fare: tuple[
+        ServiceMakeFeatures, pd.DataFrame, pd.DataFrame
+    ]
+):
+    """制約違反処理, fareが0以上1000以下の少数であること"""
+
+    (
+        service_make_features,
+        df_customer_info,
+        df_obeyed_expected,
+    ) = fixture_handle_violations_in_fare
+
+    df_obeyed = service_make_features._handle_violations(df_customer_info)
+
+    MyAssert().assert_df(df_obeyed, df_obeyed_expected)
