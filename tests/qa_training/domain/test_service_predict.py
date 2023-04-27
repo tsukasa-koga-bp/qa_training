@@ -13,13 +13,13 @@ def fixture_run(domain_registry: DomainRegistry):
     service_predict = ServicePredict()
 
     df_X = pd.read_csv(
-        "./tests/common_data/df_X.csv",
+        "tests/common_data/df_X.csv",
     )
     df_y = pd.read_csv(
-        "./tests/common_data/df_y.csv",
+        "tests/common_data/df_y.csv",
     )
     df_y_pred_expected = pd.read_csv(
-        "./tests/common_data/df_y_pred_expected.csv",
+        "tests/common_data/df_y_pred_expected.csv",
     )
 
     ml_model = service_train.run(df_X, df_y)

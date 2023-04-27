@@ -9,16 +9,16 @@ def fixture_run():
     service_make_features = ServiceMakeFeatures()
 
     df_customer_info = pd.read_csv(
-        "./tests/common_data/df_customer_info.csv",
+        "tests/common_data/df_customer_info.csv",
     )
     df_id_expected = pd.read_csv(
-        "./tests/common_data/df_id.csv",
+        "tests/common_data/df_id.csv",
     )
     df_X_expected = pd.read_csv(
-        "./tests/common_data/df_X.csv",
+        "tests/common_data/df_X.csv",
     )
     df_y_expected = pd.read_csv(
-        "./tests/common_data/df_y.csv",
+        "tests/common_data/df_y.csv",
     )
     return (
         service_make_features,
