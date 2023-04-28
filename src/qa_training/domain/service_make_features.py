@@ -99,11 +99,31 @@ class ServiceMakeFeatures:
         ]
 
         # Sex
-        df_obeyed.loc[:, "Sex"] = (
-            df_obeyed["Sex"].replace({"male": 0, "female": 1}).astype("int64")
-        )
+        df_sex = df_obeyed["Sex"].replace({"male": 0, "female": 1}).astype("int64")  # type: ignore
 
         # Embarked
-        df_X_and_id = pd.get_dummies(df_obeyed, columns=["Embarked"], dtype=float)
+        df_embarked = pd.get_dummies(
+            df_obeyed["Embarked"], prefix="Embarked", dtype=float
+        )
+
+        # Pclass
+        df_pclass = df_obeyed["Pclass"]
+
+        # Age
+        bins = [0, 10, 18, 40, 64, float("inf")]
+        labels = ["0-10", "11-18", "19-40", "41-64", "65+"]
+        df_age_category = pd.cut(
+            df_obeyed["Age"], bins=bins, labels=labels, include_lowest=True
+        )
+        # One hot encoding
+        df_age = pd.get_dummies(df_age_category, prefix="Age", dtype=float)
+
+        # Fare
+        df_fare = df_obeyed["Fare"]
+
+        # 結合
+        df_X_and_id = pd.concat(
+            [df_sex, df_embarked, df_pclass, df_age, df_fare], axis=1
+        )
 
         return df_X_and_id
