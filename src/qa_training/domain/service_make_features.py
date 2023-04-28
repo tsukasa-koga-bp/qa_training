@@ -88,6 +88,7 @@ class ServiceMakeFeatures:
             (df_filled["Fare"] >= fare_under) & (df_filled["Fare"] <= fare_upper)
         ]
 
+        # Embarked
         df_obeyed = df_filled[df_filled["Embarked"].isin(["C", "Q", "S"])]
 
         return df_obeyed.reset_index(drop=True)
@@ -101,7 +102,9 @@ class ServiceMakeFeatures:
         df_id = df_obeyed["PassengerId"]
 
         # Sex
-        df_sex = df_obeyed["Sex"].replace({"male": 0, "female": 1}).astype("int64")  # type: ignore
+        df_sex = (
+            df_obeyed["Sex"].replace({"male": 0, "female": 1}).astype("int64")
+        )  # type: ignore
 
         # Embarked
         df_embarked = pd.get_dummies(
