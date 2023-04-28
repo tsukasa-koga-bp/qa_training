@@ -97,6 +97,8 @@ class ServiceMakeFeatures:
         df_obeyed = df_obeyed[
             ["PassengerId", "Sex", "Embarked", "Pclass", "Age", "Fare"]
         ]
+        # PassengersID
+        df_id = df_obeyed["PassengerId"]
 
         # Sex
         df_sex = df_obeyed["Sex"].replace({"male": 0, "female": 1}).astype("int64")  # type: ignore
@@ -123,7 +125,7 @@ class ServiceMakeFeatures:
 
         # 結合
         df_X_and_id = pd.concat(
-            [df_sex, df_embarked, df_pclass, df_age, df_fare], axis=1
+            [df_id, df_sex, df_embarked, df_pclass, df_age, df_fare], axis=1
         )
 
         return df_X_and_id
