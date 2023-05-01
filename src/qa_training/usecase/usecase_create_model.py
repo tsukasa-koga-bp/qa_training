@@ -7,6 +7,7 @@ from qa_training.utils.boundary.repo.if_repo_model import IF_RepoModel
 from qa_training.utils.boundary.usecase.if_usecase_create_model import (
     IF_UsecaseCreateModel,
 )
+from qa_training.utils.logging import log_decorator
 from qa_training.utils.override_wrappter import override
 
 
@@ -30,6 +31,7 @@ class UsecaseCreateModel(IF_UsecaseCreateModel):
         self._model_parameters = model_parameters
 
     @override(IF_UsecaseCreateModel.create_model)
+    @log_decorator
     def create_model(self) -> None:
         # データ読み込み
         df_customer_info = self._repo_input_data.load_train()
@@ -48,5 +50,6 @@ class UsecaseCreateModel(IF_UsecaseCreateModel):
         self._repo_model.store(ml_model)
 
     @override(IF_UsecaseCreateModel.initialize)
+    @log_decorator
     def initialize(self) -> None:
         self._repo_model.initialize()

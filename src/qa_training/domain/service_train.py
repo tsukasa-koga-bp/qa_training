@@ -3,6 +3,7 @@ from typing import Any
 import pandas as pd
 from qa_training.domain.factory_ml_model import FactoryMLModel
 from qa_training.domain.ml_model import MLModel
+from qa_training.utils.logging import log_decorator
 
 
 class ServiceTrain:
@@ -15,6 +16,7 @@ class ServiceTrain:
             model_name=model_name, model_parameters=model_parameters
         )
 
+    @log_decorator
     def run(self, df_X: pd.DataFrame, df_y: pd.DataFrame) -> MLModel:
         self._ml_model.train(df_X=df_X, df_y=df_y)
 

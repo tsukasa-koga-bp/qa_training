@@ -1,9 +1,11 @@
 import pandas as pd
+from qa_training.utils.logging import log_decorator
 
 
 class ServiceMakeFeatures:
     """前処理と特徴量作成する."""
 
+    @log_decorator
     def run(
         self, df_customer_info: pd.DataFrame
     ) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:

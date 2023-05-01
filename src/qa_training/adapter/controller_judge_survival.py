@@ -7,6 +7,7 @@ from qa_training.utils.config_manager import (
     ConfigManagerUsecaseCommand,
 )
 from qa_training.utils.domain_registry import DomainRegistry
+from qa_training.utils.logging import log_decorator
 
 
 class ControllerJudgeSurvival:
@@ -19,9 +20,11 @@ class ControllerJudgeSurvival:
             usecase_command=usecase_command, repo_command=repo_command
         )
 
+    @log_decorator
     def run(self):
         self._usecase.judge_survival()
 
+    @log_decorator
     def initialize(self):
         self._usecase.initialize()
 
