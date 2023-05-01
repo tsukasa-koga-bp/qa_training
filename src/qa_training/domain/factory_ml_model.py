@@ -14,5 +14,5 @@ class FactoryMLModel:
             raise ValueError
         return self.gene_from_model(model)
 
-    def gene_from_model(self, model: Any):
+    def gene_from_model(self, model: Any) -> MLModel:
         return MLModel(model=model)
