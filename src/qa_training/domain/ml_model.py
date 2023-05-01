@@ -1,17 +1,18 @@
+from typing import Any
+
 import pandas as pd
-from sklearn.ensemble import RandomForestClassifier as RandomForest
 
 
 class MLModel:
-    def __init__(self, model=RandomForest()) -> None:
+    def __init__(self, model: Any) -> None:
         self._model = model
 
-    def get_model(self) -> RandomForest:
+    def get_model(self) -> Any:
         return self._model
 
     def train(self, df_X: pd.DataFrame, df_y: pd.DataFrame) -> None:
         y = df_y["Survived"]
-        self._model = RandomForest(n_estimators=100).fit(df_X, y)
+        self._model = self._model.fit(df_X, y)
 
     def predict(self, df_X: pd.DataFrame) -> pd.DataFrame:
         y_pred = self._model.predict(df_X)

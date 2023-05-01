@@ -20,11 +20,12 @@ def test_domain_registry_initialize(config_manager: ConfigManager) -> None:
 # Usecase
 def test_usecase(domain_registry: DomainRegistry) -> None:
     """DomainRegistryがUsecaseを正常に生成できるか."""
-    usecase_judge_survival = domain_registry.usecase_judge_survival()
-    assert isinstance(usecase_judge_survival, IF_UsecaseJudgeSurvival)
 
     usecase_create_model = domain_registry.usecase_create_model()
     assert isinstance(usecase_create_model, IF_UsecaseCreateModel)
+
+    usecase_judge_survival = domain_registry.usecase_judge_survival()
+    assert isinstance(usecase_judge_survival, IF_UsecaseJudgeSurvival)
 
 
 # repo

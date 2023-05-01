@@ -1,6 +1,7 @@
 import os
 import pickle
 
+from qa_training.domain.factory_ml_model import FactoryMLModel
 from qa_training.domain.ml_model import MLModel
 from qa_training.utils.boundary.repo.if_repo_model import IF_RepoModel
 from qa_training.utils.override_wrappter import override
@@ -14,7 +15,7 @@ class RepoModel(IF_RepoModel):
     def load(self) -> MLModel:
         with open(self._model_path, "rb") as file:
             model = pickle.load(file)
-        return MLModel(model)
+        return FactoryMLModel().gene_from_model(model=model)
 
     @override(IF_RepoModel.store)
     def store(self, ml_model: MLModel) -> None:
