@@ -4,6 +4,10 @@ import pandas as pd
 
 
 class MLModel:
+    """
+    モデルを管理する
+    """
+
     def __init__(self, model: Any) -> None:
         self._model = model
 

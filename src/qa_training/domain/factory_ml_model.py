@@ -5,6 +5,8 @@ from sklearn.ensemble import RandomForestClassifier
 
 
 class FactoryMLModel:
+    """モデルを生成する"""
+
     def gene_from_parameters(
         self, model_name: str, model_parameters: dict[str, Any]
     ) -> MLModel:
