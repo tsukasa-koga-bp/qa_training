@@ -1,3 +1,5 @@
+from typing import Any
+
 from qa_training.domain.service_make_features import ServiceMakeFeatures
 from qa_training.domain.service_train import ServiceTrain
 from qa_training.utils.boundary.repo.if_repo_input_data import IF_RepoInputData
@@ -12,13 +14,20 @@ class UsecaseCreateModel(IF_UsecaseCreateModel):
     """モデル作成ユースケース."""
 
     def __init__(
-        self, repo_model: IF_RepoModel, repo_input_data: IF_RepoInputData, **kwargs
+        self,
+        repo_model: IF_RepoModel,
+        repo_input_data: IF_RepoInputData,
+        model_name: str,
+        model_parameters: dict[str, Any],
+        **kwargs
     ) -> None:
         assert isinstance(repo_model, IF_RepoModel)
         assert isinstance(repo_input_data, IF_RepoInputData)
 
         self._repo_model = repo_model
         self._repo_input_data = repo_input_data
+        self._model_name = model_name
+        self._model_parameters = model_parameters
 
     @override(IF_UsecaseCreateModel.create_model)
     def create_model(self) -> None:
@@ -30,7 +39,9 @@ class UsecaseCreateModel(IF_UsecaseCreateModel):
         _, df_X, df_y = service_make_features.run(df_customer_info)
 
         # 学習
-        service_train = ServiceTrain()
+        service_train = ServiceTrain(
+            model_name=self._model_name, model_parameters=self._model_parameters
+        )
         ml_model = service_train.run(df_X, df_y)
 
         # モデルを保存
