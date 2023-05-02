@@ -36,3 +36,4 @@ site/
 data/**/*.csv
 data/**/*.pkl
 tests/output/*
+log/*.log

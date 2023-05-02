@@ -27,7 +27,7 @@ class FactoryLogger:
         )
 
         # ファイル出力系ハンドラ
-        file_handler = self._get_file_handler(f"{log_path}/general-log")
+        file_handler = self._get_file_handler(f"{log_path}/general-log.log")
         file_handler.setFormatter(formatter)
         logger.addHandler(file_handler)
         return logger
