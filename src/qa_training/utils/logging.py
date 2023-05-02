@@ -7,6 +7,7 @@ import pandas as pd
 from qa_training.utils.factory_logger import FactoryLogger
 
 general_logger = FactoryLogger().get_general_logger()
+log_target_length = 20  # ログ対象とする引数のデータ構造の長さ, この長さを超えると長さのみログに残す.
 
 
 def log_decorator(func):
@@ -28,14 +29,14 @@ def log_decorator(func):
 
             non_self_kwargs = _get_non_self_kwargs(func=func, args=args, kwargs=kwargs)
 
-            args_for_logging = _transform_kwargs(True, non_self_kwargs)
+            kwargs_for_logging = _transform_kwargs_for_logging(True, non_self_kwargs)
 
             general_logger.info(
                 {
                     "message": "",
                     "funcName": class_name + "." + func.__name__,
                     "time": total_time,
-                    "args": args_for_logging,
+                    "kwargs": kwargs_for_logging,
                 }
             )
             return result
@@ -62,7 +63,7 @@ def _get_non_self_kwargs(func, args: tuple, kwargs: dict):
     return non_self_kwargs
 
 
-def _transform_kwargs(with_kwargs: bool, kwargs: dict) -> list:
+def _transform_kwargs_for_logging(with_kwargs: bool, kwargs: dict) -> dict:
     """ロギング用　引数変換
 
     出力が長くなる型の引数を型名に変換する(引数保存がない場合は引数を無視）
@@ -76,15 +77,22 @@ def _transform_kwargs(with_kwargs: bool, kwargs: dict) -> list:
     """
 
     if with_kwargs is False:
-        return ["not_recoded"]
+        return {"not_recoded": ""}
     if len(kwargs) == 0:
-        return []
+        return {}
 
-    args_for_logging = []
+    kwargs_for_logging = {}
     for k, v in kwargs.items():
-        if type(v) in [list, pd.DataFrame, dict, bytes]:
-            args_for_logging.append(k)
+        if type(v) is pd.DataFrame:
+            kwargs_for_logging[k] = f"shape: {v.shape}"
+        elif type(v) in [list, dict, bytes]:
+            if len(v) <= log_target_length:
+                kwargs_for_logging[k] = v
+            else:
+                kwargs_for_logging[k] = f"length: {len(v)}"
+        elif type(v) is bytes:
+            kwargs_for_logging[k] = type(v)
         else:
-            args_for_logging.append(v)
+            kwargs_for_logging[k] = v
 
-    return args_for_logging
+    return kwargs_for_logging
