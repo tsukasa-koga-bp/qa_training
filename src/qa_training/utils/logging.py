@@ -78,7 +78,7 @@ def _transform_kwargs(with_kwargs: bool, kwargs: dict) -> list:
     if with_kwargs is False:
         return ["not_recoded"]
     if len(kwargs) == 0:
-        return ["not args"]
+        return []
 
     args_for_logging = []
     for k, v in kwargs.items():
