@@ -7,6 +7,7 @@ from qa_training.utils.boundary.repo.if_repo_output_data import IF_RepoOutputDat
 from qa_training.utils.boundary.usecase.if_usecase_judge_survival import (
     IF_UsecaseJudgeSurvival,
 )
+from qa_training.utils.logging import log_decorator
 from qa_training.utils.override_wrappter import override
 
 
@@ -28,6 +29,7 @@ class UsecaseJudgeSurvival(IF_UsecaseJudgeSurvival):
         self._repo_output_data = repo_output_data
 
     @override(IF_UsecaseJudgeSurvival.judge_survival)
+    @log_decorator
     def judge_survival(self) -> None:
         # データ読み込み
         df_customer_info = self._repo_input_data.load_test()
@@ -50,6 +52,7 @@ class UsecaseJudgeSurvival(IF_UsecaseJudgeSurvival):
         self._repo_output_data.store(df_results=df_results)
 
     @override(IF_UsecaseJudgeSurvival.initialize)
+    @log_decorator
     def initialize(self) -> None:
         self._repo_model.initialize()
         self._repo_output_data.initialize()
