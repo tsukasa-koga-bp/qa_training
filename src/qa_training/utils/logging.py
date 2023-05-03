@@ -15,9 +15,9 @@ def log_decorator(func):
     def wrapper(*args, **kwargs):
         start_time = time.time()
         try:
+            # 計測
             result = func(*args, **kwargs)
             end_time = time.time()
-            # 計測
             total_time = round(end_time - start_time, 4)
 
             # クラス名取得
@@ -28,7 +28,6 @@ def log_decorator(func):
             )
 
             non_self_kwargs = _get_non_self_kwargs(func=func, args=args, kwargs=kwargs)
-
             kwargs_for_logging = _transform_kwargs_for_logging(True, non_self_kwargs)
 
             general_logger.info(
@@ -64,9 +63,7 @@ def _get_non_self_kwargs(func, args: tuple, kwargs: dict):
 
 
 def _transform_kwargs_for_logging(with_kwargs: bool, kwargs: dict) -> dict:
-    """ロギング用　引数変換
-
-    出力が長くなる型の引数を型名に変換する(引数保存がない場合は引数を無視）
+    """ロギング用引数変換
 
     Args:
         with_args (bool): 引数保存の有無
