@@ -1,3 +1,4 @@
+import json
 import logging
 from logging.handlers import TimedRotatingFileHandler
 
@@ -7,14 +8,17 @@ log_path = "log"
 
 
 class FactoryLogger:
+    """ロガーを生成する"""
+
     def __init__(self) -> None:
         self._general_logger = self._gene_general_logger()
 
     def get_general_logger(self):
+        """ロガーの取得"""
         return self._general_logger
 
     def _gene_general_logger(self):
-        # ロガーの生成
+        # 汎用ロガーの生成
         logger = logging.getLogger("General")
 
         # ロギングレベルの設定（デフォルト）
@@ -30,6 +34,22 @@ class FactoryLogger:
         file_handler = self._get_file_handler(f"{log_path}/general-log.log")
         file_handler.setFormatter(formatter)
         logger.addHandler(file_handler)
+        return logger
+
+    def get_error_logger(self) -> logging.Logger:
+        """Error用ロガー生成"""
+
+        # ロガーの生成
+        logger = logging.getLogger("ERROR")
+
+        # ロギングレベルの設定（デフォルト）
+        logger.setLevel(logging.ERROR)
+
+        # ファイル出力系ハンドラ
+        file_handler = self._get_file_handler(f"{log_path}/error-log")
+        file_handler.setFormatter(CustomLogFormatter())
+        logger.addHandler(file_handler)
+
         return logger
 
     def _get_file_handler(self, log_name: str) -> TimedRotatingFileHandler:
@@ -51,3 +71,21 @@ class FactoryLogger:
         )
 
         return handler
+
+
+# 参考元: https://qiita.com/hoto17296/items/fa840823245fa4e7517d
+class CustomLogFormatter(logging.Formatter):
+    """ログをJSONで出力するフォーマッタ"""
+
+    def format(self, record: logging.LogRecord) -> str:
+        try:
+            data = vars(record)
+            if "exc_info" in data:
+                # exc_infoはjson形式にできないので抽出して変換
+                exc_info = data["exc_info"]
+                data["traceback"] = self.formatException(exc_info).splitlines()
+                # exc_infoがないとテストコードでエラーになるので空のデータにする
+                data["exc_info"] = ""
+            return json.dumps(data, ensure_ascii=False)
+        except Exception:
+            return super().format(record)
