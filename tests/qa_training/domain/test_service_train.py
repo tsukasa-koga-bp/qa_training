@@ -13,7 +13,17 @@ params = {
             "n_estimators": 100,
             "random_state": 62,
         },
-    )
+    ),
+    "LogisticRegression": (
+        "LogisticRegression",
+        {
+            "penalty": "l2",
+            "tol": 0.0001,
+            "max_iter": 100,
+            "multi_class": "auto",
+            "random_state": None,
+        },
+    ),
 }
 
 

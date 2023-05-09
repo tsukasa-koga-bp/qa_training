@@ -3,6 +3,7 @@ from typing import Any
 from qa_training.domain.ml_model import MLModel
 from qa_training.utils.logging import log_decorator
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
 
 
 class FactoryMLModel:
@@ -14,6 +15,8 @@ class FactoryMLModel:
     ) -> MLModel:
         if model_name == "RandomForest":
             model = RandomForestClassifier(**model_parameters)  # type: ignore
+        elif model_name == "LogisticRegression":
+            model = LogisticRegression(**model_parameters)  # type: ignore
         else:
             raise ValueError
         return self.gene_from_model(model)
