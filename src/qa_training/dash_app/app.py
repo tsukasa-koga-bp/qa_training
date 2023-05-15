@@ -1,8 +1,7 @@
 from abc import ABC, abstractmethod
 
-import dash
 import dash_bootstrap_components as dbc
-from dash import Input, Output, dcc, html
+from dash import Dash, Input, Output, State, dcc, html
 
 
 class CustomPage(ABC):
@@ -18,10 +17,27 @@ class CustomPage(ABC):
     def render(self):
         pass
 
+    @abstractmethod
+    def set_callback(self, app: Dash):
+        pass
+
 
 class Sidebar:
     def __init__(self, style=None):
-        self.style = style if style else {}
+        self._title = "Titanic Survial Judge"
+        self._discription = "Machine Learning Application Demo for Quality Assurance Lecture Exercise Assignment"
+        self.style = {}
+        if style is None:
+            style = {
+                "position": "fixed",
+                "top": 0,
+                "left": 0,
+                "bottom": 0,
+                "width": "16rem",
+                "padding": "2rem 1rem",
+                "background-color": "#f8f9fa",
+            }
+            self.style = style
         self._pages = []
 
     def add_page(self, title, href):
@@ -35,11 +51,9 @@ class Sidebar:
 
         sidebar = html.Div(
             [
-                html.H2("Sidebar", className="display-4"),
+                html.H2(self._title, className="display-4"),
                 html.Hr(),
-                html.P(
-                    "A simple sidebar layout with navigation links", className="lead"
-                ),
+                html.P(self._discription, className="lead"),
                 dbc.Nav(nav_items, vertical=True, pills=True),
             ],
             style=self.style,
@@ -61,11 +75,17 @@ class HomePage(CustomPage):
     def render(self):
         return html.P("This is home")
 
+    def set_callback(self, app: Dash):
+        pass
 
-class Page1(CustomPage):
+
+class CreateModelPage(CustomPage):
     def __init__(self, id: str, pathname: str) -> None:
-        self._title = "Page 1"
+        self._title = "Create Model"
+        self._page_name = "create_model"
         self._pathname = pathname
+        self._run_button_id = f"{self._page_name}_run_button"
+        self._run_state_id = f"{self._page_name}_run_state"
 
     def get_title(self):
         return self._title
@@ -74,12 +94,31 @@ class Page1(CustomPage):
         return self._pathname
 
     def render(self):
-        return html.P("This is the content of page 1. Yay!")
+        return html.Div(
+            [
+                html.H2(self._title, className="display-3"),
+                html.Hr(),
+                html.P("モデル作成", className="lead"),
+                dbc.Button("Run", id=self._run_button_id, color="primary", n_clicks=0),
+                html.Div(
+                    id=self._run_state_id,
+                    children="Enter a value and press submit",
+                ),
+            ]
+        )
+
+    def set_callback(self, app: Dash):
+        @app.callback(
+            Output(self._run_state_id, "children"),
+            Input(self._run_button_id, "n_clicks"),
+        )
+        def update_output(n_clicks):
+            return f"The button has been clicked {n_clicks} times"
 
 
-class Page2(CustomPage):
+class JudgeSurvivalPage(CustomPage):
     def __init__(self, id: str, pathname: str) -> None:
-        self._title = "Page 2"
+        self._title = "Judge Survival"
         self._pathname = pathname
 
     def get_title(self):
@@ -91,38 +130,36 @@ class Page2(CustomPage):
     def render(self):
         return html.P("Oh cool, this is page 2!")
 
+    def set_callback(self, app: Dash):
+        pass
+
 
 class MyApp:
     def __init__(self):
-        self.app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])
+        self._app = Dash(
+            external_stylesheets=[dbc.themes.BOOTSTRAP],
+            suppress_callback_exceptions=True,
+        )
         self._pages: list[CustomPage] = []
+        self._sidebar: Sidebar
 
     def set_pages(self, pages: list[CustomPage]):
         self._pages = pages
 
+    def set_sidebar(self, sidebar: Sidebar):
+        self._sidebar = sidebar
+
     def set_layout(self):
-        sidebar = self._create_sidebar()
         content = self._create_content()
 
         for page in self._pages:
             title = page.get_title()
             pathname = page.get_pathname()
-            sidebar.add_page(title, pathname)
+            self._sidebar.add_page(title, pathname)
 
-        self.app.layout = html.Div([dcc.Location(id="url"), sidebar.render(), content])
-
-    def _create_sidebar(self) -> Sidebar:
-        sidebar_style = {
-            "position": "fixed",
-            "top": 0,
-            "left": 0,
-            "bottom": 0,
-            "width": "16rem",
-            "padding": "2rem 1rem",
-            "background-color": "#f8f9fa",
-        }
-
-        return Sidebar(style=sidebar_style)
+        self._app.layout = html.Div(
+            [dcc.Location(id="url"), self._sidebar.render(), content]
+        )
 
     def _create_content(self):
         CONTENT_STYLE = {
@@ -134,11 +171,11 @@ class MyApp:
         return content
 
     def run(self, debug=False):
-        self.set_callbacks()
-        self.app.run_server(debug=debug, port=8888)
+        self._set_callbacks()
+        self._app.run_server(debug=debug, port=8888)
 
-    def set_callbacks(self):
-        @self.app.callback(
+    def _set_callbacks(self):
+        @self._app.callback(
             Output("page-content", "children"), [Input("url", "pathname")]
         )
         def render_page_content(pathname):
@@ -156,14 +193,22 @@ class MyApp:
                 className="p-3 bg-light rounded-3",
             )
 
+        for page in self._pages:
+            page.set_callback(self._app)
+
 
 if __name__ == "__main__":
+    sidebar = Sidebar()
     homepage = HomePage(id="homepage", pathname="/")
-    page1 = Page1(id="page1", pathname="/page-1")
-    page2 = Page2(id="page2", pathname="/page-2")
-    page3 = Page2(id="page3", pathname="/page-3")
+    create_model_page = CreateModelPage(
+        id="create_model_page", pathname="/create_model_page"
+    )
+    judge_survival_page = JudgeSurvivalPage(
+        id="judge_survival_page", pathname="/judge_survival_page"
+    )
 
     app = MyApp()
-    app.set_pages(pages=[homepage, page1, page2, page3])
+    app.set_pages(pages=[homepage, create_model_page, judge_survival_page])
+    app.set_sidebar(sidebar=sidebar)
     app.set_layout()
     app.run(debug=True)
