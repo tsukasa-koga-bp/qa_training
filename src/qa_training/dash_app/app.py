@@ -1,7 +1,15 @@
+import sys
 from abc import ABC, abstractmethod
 
+sys.path.append("src/")
 import dash_bootstrap_components as dbc
-from dash import Dash, Input, Output, State, dcc, html
+from dash import Dash, Input, Output, dcc, html
+
+from qa_training.adapter.controller_create_model import ControllerCreateModel
+from qa_training.utils.config_manager import (
+    ConfigManagerRepoCommand,
+    ConfigManagerUsecaseCommand,
+)
 
 
 class CustomPage(ABC):
@@ -111,9 +119,31 @@ class CreateModelPage(CustomPage):
         @app.callback(
             Output(self._run_state_id, "children"),
             Input(self._run_button_id, "n_clicks"),
+            prevent_initial_call=True,
         )
         def update_output(n_clicks):
-            return f"The button has been clicked {n_clicks} times"
+            configs = "configs"
+
+            try:
+                usecase_command = ConfigManagerUsecaseCommand(
+                    usecase_create_model_yaml_path=f"{configs}/usecase/UsecaseCreateModel.yaml",
+                    usecase_judge_survival_yaml_path=f"{configs}/usecase/UsecaseJudgeSurvival.yaml",
+                )
+
+                repo_command = ConfigManagerRepoCommand(
+                    repo_input_data_yaml_path=f"{configs}/repo/RepoInputData.yaml",
+                    repo_model_yaml_path=f"{configs}/repo/RepoModel.yaml",
+                    repo_output_data_yaml_path=f"{configs}/repo/RepoOutputData.yaml",
+                )
+
+                controller = ControllerCreateModel(
+                    usecase_command=usecase_command, repo_command=repo_command
+                )
+
+                controller.run()
+                return "success"
+            except Exception:
+                return "failed"
 
 
 class JudgeSurvivalPage(CustomPage):
@@ -197,7 +227,7 @@ class MyApp:
             page.set_callback(self._app)
 
 
-if __name__ == "__main__":
+def dash_main():
     sidebar = Sidebar()
     homepage = HomePage(id="homepage", pathname="/")
     create_model_page = CreateModelPage(
@@ -212,3 +242,7 @@ if __name__ == "__main__":
     app.set_sidebar(sidebar=sidebar)
     app.set_layout()
     app.run(debug=True)
+
+
+if __name__ == "__main__":
+    dash_main()
