@@ -4,7 +4,9 @@ version = "0.1.0"
 description = ""
 authors = ["maji <majitaki1234@gmail.com>"]
 readme = "README.md"
-packages = [{include = "qa_training"}]
+packages = [
+    { include = "qa_training", from = "src" }
+]
 
 [tool.poetry.dependencies]
 python = "^3.10"

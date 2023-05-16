@@ -1,8 +1,5 @@
-import sys
-
 import click
 
-sys.path.append("src/")
 from qa_training.adapter.controller_create_model import (
     ControllerCreateModel,
 )
