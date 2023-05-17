@@ -1,4 +1,6 @@
+from qa_training.dash_app.app import dash_main
+
+
 def test_dash():
-    pass
     # dashをデバッグしたい時にコメントアウトを外す
-    # dash_main()
+    dash_main()

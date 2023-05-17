@@ -1,3 +1,5 @@
+import pandas as pd
+
 from qa_training.utils.boundary.usecase.if_usecase_create_model import (
     IF_UsecaseCreateModel,
 )
@@ -21,6 +23,12 @@ class ControllerCreateModel:
 
     def run(self):
         self._usecase.create_model()
+
+    def make_features(
+        self, df_customer_info: pd.DataFrame
+    ) -> tuple[pd.DataFrame, pd.DataFrame]:
+        df_X, df_y = self._usecase.make_features(df_customer_info)
+        return df_X, df_y
 
     def initialize(self):
         self._usecase.initialize()
