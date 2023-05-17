@@ -1,5 +1,6 @@
 import pandas as pd
 
+from qa_training.domain.ml_model import MLModel
 from qa_training.utils.boundary.usecase.if_usecase_create_model import (
     IF_UsecaseCreateModel,
 )
@@ -29,6 +30,13 @@ class ControllerCreateModel:
     ) -> tuple[pd.DataFrame, pd.DataFrame]:
         df_X, df_y = self._usecase.make_features(df_customer_info)
         return df_X, df_y
+
+    def train(self, df_X: pd.DataFrame, df_y: pd.DataFrame) -> MLModel:
+        ml_model = self._usecase.train(df_X=df_X, df_y=df_y)
+        return ml_model
+
+    def store(self, ml_model: MLModel) -> None:
+        self._usecase.store(ml_model=ml_model)
 
     def initialize(self):
         self._usecase.initialize()

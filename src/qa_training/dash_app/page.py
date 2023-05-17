@@ -5,7 +5,7 @@ from abc import ABC, abstractmethod
 
 import dash_bootstrap_components as dbc
 import pandas as pd
-from dash import Dash, Input, Output, State, dash_table, dcc, html
+from dash import Dash, Input, Output, State, dash_table, dcc, html, no_update
 from dash.exceptions import PreventUpdate
 
 from qa_training.adapter.controller_create_model import ControllerCreateModel
@@ -96,13 +96,36 @@ class CreateModelPage(CustomPage):
         self._title = "Create Model"
         self._page_name = "create_model"
         self._pathname = pathname
-        self._upload_train_data_id = f"{self._page_name}_upload_train_data"
+        self._drag_and_drop_train_data_id = (
+            f"{self._page_name}_drag_and_drop_train_data"
+        )
         self._temp_train_data_id = f"{self._page_name}_temp_train_data"
         self._view_train_data_id = f"{self._page_name}_view_train_data"
-        self._make_feature_id = f"{self._page_name}_make_feature"
-        self._temp_feature_id = f"{self._page_name}_temp_feature"
-        self._train_id = f"{self._page_name}_train"
-        self._store_id = f"{self._page_name}_store"
+        self._make_features_button_id = f"{self._page_name}_make_features_button"
+        self._temp_features_id = f"{self._page_name}_temp_features"
+        self._view_features_id = f"{self._page_name}_view_features"
+        self._train_button_id = f"{self._page_name}_train_button"
+        self._temp_model_id = f"{self._page_name}_temp_model"
+        self._view_model_id = f"{self._page_name}_view_model"
+
+        self._set_controller()
+
+    def _set_controller(self):
+        configs = "configs"
+        usecase_command = ConfigManagerUsecaseCommand(
+            usecase_create_model_yaml_path=f"{configs}/usecase/UsecaseCreateModel.yaml",
+            usecase_judge_survival_yaml_path=f"{configs}/usecase/UsecaseJudgeSurvival.yaml",
+        )
+
+        repo_command = ConfigManagerRepoCommand(
+            repo_input_data_yaml_path=f"{configs}/repo/RepoInputData.yaml",
+            repo_model_yaml_path=f"{configs}/repo/RepoModel.yaml",
+            repo_output_data_yaml_path=f"{configs}/repo/RepoOutputData.yaml",
+        )
+
+        self._controller = ControllerCreateModel(
+            usecase_command=usecase_command, repo_command=repo_command
+        )
 
     def get_title(self):
         return self._title
@@ -117,7 +140,7 @@ class CreateModelPage(CustomPage):
                 html.Hr(),
                 html.P("学習データ読み込み", className="lead"),
                 dcc.Upload(
-                    id=self._upload_train_data_id,
+                    id=self._drag_and_drop_train_data_id,
                     children=html.Div(["Drag and Drop or ", html.A("Select CSV")]),
                     style={
                         "width": "80%",
@@ -140,30 +163,35 @@ class CreateModelPage(CustomPage):
                 html.Hr(),
                 html.P("特徴量作成", className="lead"),
                 dbc.Button(
-                    "Run", id=self._make_feature_id, color="primary", n_clicks=0
+                    "Run",
+                    id=self._make_features_button_id,
+                    color="primary",
+                    n_clicks=0,
+                    disabled=True,
                 ),
-                dcc.Store(id=self._temp_feature_id, storage_type="session"),
-                html.Div(id="table1"),
+                dcc.Store(id=self._temp_features_id, storage_type="session"),
+                html.Div(id=self._view_features_id),
                 html.Hr(),
                 html.P("学習", className="lead"),
-                dbc.Button("Run", id=self._train_id, color="primary", n_clicks=0),
-                html.Div(id="table1"),
-                html.Hr(),
-                html.P("モデル保存", className="lead"),
-                dbc.Button("Run", id=self._store_id, color="primary", n_clicks=0),
-                html.Div(id="table1"),
+                dbc.Button(
+                    "Run",
+                    id=self._train_button_id,
+                    color="primary",
+                    n_clicks=0,
+                    disabled=True,
+                ),
+                html.Div(id="table_model"),
             ]
         )
 
     def set_callback(self, app: Dash):
         @app.callback(
             Output(self._temp_train_data_id, "data"),
-            Input(self._upload_train_data_id, "contents"),
-            State(self._upload_train_data_id, "filename"),
-            State(self._upload_train_data_id, "last_modified"),
-            State(self._temp_train_data_id, "data"),
+            Input(self._drag_and_drop_train_data_id, "contents"),
+            State(self._drag_and_drop_train_data_id, "filename"),
+            State(self._drag_and_drop_train_data_id, "last_modified"),
         )
-        def parse_data(contents, filename, last_modified, data):
+        def parse_data(contents, filename, last_modified):
             if contents is not None:
                 content_type, content_string = contents.split(",")
                 decoded = base64.b64decode(content_string)
@@ -171,23 +199,28 @@ class CreateModelPage(CustomPage):
                     df = pd.read_csv(io.StringIO(decoded.decode("utf-8")))
                 except Exception as e:
                     print(e)
-                    return None
-                return df.to_dict("records"), filename, last_modified
-            elif data is not None:
-                return data
-            else:
-                raise PreventUpdate
+                    raise PreventUpdate
+                return df.to_dict("records")
+
+        @app.callback(
+            Output(self._drag_and_drop_train_data_id, "filename"),
+            Output(self._drag_and_drop_train_data_id, "last_modified"),
+            Input(self._temp_train_data_id, "data"),
+        )
+        def reset_upload(data):
+            return [no_update]*2
 
         @app.callback(
             Output(self._view_train_data_id, "children"),
             Input(self._temp_train_data_id, "data"),
+            State(self._drag_and_drop_train_data_id, "filename"),
+            State(self._drag_and_drop_train_data_id, "last_modified"),
         )
-        def update_view_train_data(data):
+        def update_view_train_data(data, filename, last_modified):
             if data is None:
                 raise PreventUpdate
 
-            raw_data, filename, last_modified = data
-            df = pd.DataFrame.from_records(raw_data)
+            df = pd.DataFrame.from_records(data)
             return html.Div(
                 [
                     html.H5(filename),
@@ -201,35 +234,60 @@ class CreateModelPage(CustomPage):
             )
 
         @app.callback(
-            Output(self._temp_feature_id, "data"),
-            Input(self._make_feature_id, "n_clicks"),
+            Output(self._temp_features_id, "data"),
+            Input(self._make_features_button_id, "n_clicks"),
             State(self._temp_train_data_id, "data"),
         )
         def run_make_feature(n_clicks, data):
             if data is None:
                 raise PreventUpdate
 
-            configs = "configs"
-            raw_data, filename, last_modified = data
-            df_customer_info = pd.DataFrame.from_records(raw_data)
+            df_customer_info = pd.DataFrame.from_records(data)
 
-            usecase_command = ConfigManagerUsecaseCommand(
-                usecase_create_model_yaml_path=f"{configs}/usecase/UsecaseCreateModel.yaml",
-                usecase_judge_survival_yaml_path=f"{configs}/usecase/UsecaseJudgeSurvival.yaml",
-            )
-
-            repo_command = ConfigManagerRepoCommand(
-                repo_input_data_yaml_path=f"{configs}/repo/RepoInputData.yaml",
-                repo_model_yaml_path=f"{configs}/repo/RepoModel.yaml",
-                repo_output_data_yaml_path=f"{configs}/repo/RepoOutputData.yaml",
-            )
-
-            controller = ControllerCreateModel(
-                usecase_command=usecase_command, repo_command=repo_command
-            )
-
-            df_X, df_y = controller.make_features(df_customer_info)
+            df_X, df_y = self._controller.make_features(df_customer_info)
             return df_X.to_dict("records"), df_y.to_dict("records")
+
+        @app.callback(
+            Output(self._view_features_id, "children"),
+            Input(self._temp_features_id, "data"),
+        )
+        def update_view_features(data):
+            if data is None:
+                raise PreventUpdate
+
+            df_X_raw, df_y_raw = data
+            df_X = pd.DataFrame.from_records(df_X_raw)
+            df_y = pd.DataFrame.from_records(df_y_raw)
+
+            return html.Div(
+                [
+                    html.H6("The top 10 lines"),
+                    dash_table.DataTable(
+                        df_X[:10].to_dict("records"),
+                        [{"name": i, "id": i} for i in df_X.columns],
+                    ),
+                    dash_table.DataTable(
+                        df_y[:10].to_dict("records"),
+                        [{"name": i, "id": i} for i in df_y.columns],
+                    ),
+                ]
+            )
+
+        @app.callback(
+            Output(self._view_model_id, "data"),
+            Input(self._train_button_id, "n_clicks"),
+            State(self._temp_features_id, "data"),
+        )
+        def run_train(n_clicks, data):
+            if data is None:
+                raise PreventUpdate
+
+            df_X_raw, df_y_raw = data
+            df_X = pd.DataFrame.from_records(df_X_raw)
+            df_y = pd.DataFrame.from_records(df_y_raw)
+
+            ml_model = self._controller.train(df_X=df_X, df_y=df_y)
+            self._controller.store(ml_model=ml_model)
 
 
 class JudgeSurvivalPage(CustomPage):
