@@ -1,13 +1,13 @@
 import dash_bootstrap_components as dbc
 from dash import Dash, Input, Output, dcc, html
 
+from qa_training.dash_app.create_model_page import CreateModelPage
 from qa_training.dash_app.page import (
-    CreateModelPage,
     CustomPage,
     HomePage,
     JudgeSurvivalPage,
-    Sidebar,
 )
+from qa_training.dash_app.sidebar import Sidebar
 
 
 class MyApp:
