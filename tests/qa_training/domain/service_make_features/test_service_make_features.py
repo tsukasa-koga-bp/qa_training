@@ -34,6 +34,7 @@ def test_run(
         ServiceMakeFeatures, pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame
     ]
 ):
+    # Assert (テスト準備)
     (
         service_make_features,
         df_customer_info,
@@ -42,8 +43,10 @@ def test_run(
         df_y_expected,
     ) = fixture_run
 
+    # Act (テスト実行)
     df_id, df_X, df_y = service_make_features.run(df_customer_info)
 
+    # Assert (テスト実行結果確認)
     MyAssert().assert_df(df_id, df_id_expected)
     MyAssert().assert_df(df_X, df_X_expected)
     MyAssert().assert_df(df_y, df_y_expected)
