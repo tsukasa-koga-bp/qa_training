@@ -49,6 +49,7 @@ class ServiceMakeFeatures:
 
         df_y = df_y[["Survived"]]
         return df_y.reset_index(drop=True)
+        aaaa
 
     def _handle_missing_values(self, df_customer_info) -> pd.DataFrame:
         """欠損値処理する."""
