@@ -18,7 +18,10 @@ from qa_training.utils.config_manager import (
 @click.option("--enable_create_model", is_flag=True, help="モデル作成するか")
 @click.option("--enable_judge_survival", is_flag=True, help="生存判定するか")
 @click.option(
-    "--configs", type=click.Path(exists=True), default="configs", help="configsフォルダのパス"
+    "--configs",
+    type=click.Path(exists=True),
+    default="configs",
+    help="configsフォルダのパス",
 )
 def main(
     enable_create_model: bool,
