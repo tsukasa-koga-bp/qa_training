@@ -1,0 +1,4 @@
+PassengerId,Pclass,Sex,Fare,Embarked_C,Embarked_Q,Embarked_S,Age_0-10,Age_11-18,Age_19-40,Age_41-64,Age_65+
+1,4,0,7.25,0,0,1,0,0,1,0,0
+1,4,0,7.25,1,0,0,0,0,1,0,0
+1,4,0,7.25,0,1,0,0,0,1,0,0
